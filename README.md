@@ -27,17 +27,18 @@ As a user, I can:
 
 1. See all all participant's name in the dropdown menu by **requesting** data from the server
 
-2. Select a participant from drop down menu and see participant's info inside '#detailed-info' div ` Find HTML format below:
+2. Select a participant from drop down menu and see participant's info inside `#detailed-info` div. 
+Find HTML format below:
 
 ```html
-		<p>Participant's Name</p>
-		<img src="participant's Image">
-		<h4>Total Calories: Participant's Calories</h4>
-		<form>
-			<input type="text" placeholder="Enter Calories">
-			<input type="submit" value="Add Calories">
-		</form>
-		<button>Reset Calories</button>
+<p>Participant's Name</p>
+<img src="participant's Image">
+<h4>Total Calories: Participant's Calories</h4>
+<form>
+	<input type="text" placeholder="Enter Calories">
+	<input type="submit" value="Add Calories">
+</form>
+<button>Reset Calories</button>
 ```
 3. Clicks on "Add Calories" button to add calories to a Participant. Persist calories value to the server and update the DOM.
 
