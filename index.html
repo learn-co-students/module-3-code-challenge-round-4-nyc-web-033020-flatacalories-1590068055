@@ -5,15 +5,23 @@
     </head>
     <body>
         <div class = "dropdown">
-            <select id ="participant-names">
-                <option selected disabled>Select a Participant</option>
+            <select id ="character-names">
+                <option selected disabled>Select a Character</option>
                 <!-- show participants names here -->
             </select>
         </div>
         
-        <div class = "participantInfo">
+        <div class = "characterInfo">
             <div id="detailed-info">
-                <!-- append participant information here -->
+                <p>Character's Name</p>
+                <img src="https://www.spicyauctiontemplates.com/samples/blue/insertimagehere.gif"><!-- display character image here -->
+                <h4>Total Calories: Character's Calories</h4>
+                <form>
+                    <input type="hidden" value="Character's id" id="characterId"/> <!-- Assign character id as a value here -->
+                    <input type="text" placeholder="Enter Calories"/>
+                    <input type="submit" value="Add Calories"/>
+                </form>
+                <button>Reset Calories</button>
             </div>
         </div>
         <script src="src/index.js"></script>

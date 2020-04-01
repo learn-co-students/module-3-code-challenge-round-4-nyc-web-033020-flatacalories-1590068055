@@ -18,38 +18,30 @@ Your base URL for your API will be: http://localhost:3000
 
 The endpoints you will need are:
 
-- GET `/participants`
-- PATCH `/participants/:id`
+- GET `/characters`
+- GET `/characters/:id`
+- PATCH `/characters/:id`
 
 ## Core Deliverables
 
 As a user, I can:
 
-1. See all all participant's name in the dropdown menu by **requesting** data from the server
+1. See all character's name in the dropdown menu by **requesting** data from the server
 
-2. Select a participant from drop down menu and see participant's info inside `#detailed-info` div. 
-Find HTML format below:
+2. Select a character from drop down menu and see character's info inside `#detailed-info` div. 
 
-```html
-<p>Participant's Name</p>
-<img src="participant's Image">
-<h4>Total Calories: Participant's Calories</h4>
-<form>
-	<input type="text" placeholder="Enter Calories">
-	<input type="submit" value="Add Calories">
-</form>
-<button>Reset Calories</button>
-```
-3. Clicks on "Add Calories" button to add calories to a Participant. Persist calories value to the server and update the DOM.
+3. Clicks on "Add Calories" button to add calories to a Character. Persist calories value to the server and update the DOM.
 
 ## Advanced Deliverables
 
-These deliverables are not required to pass the code challenge, but if you have the extra time, or even after the code challenge, they are a great way to stretch your skills.
+These deliverables are not required to pass the code challenge, but if you have the extra time, or even after the code challenge, they are a great way to stretch your skills. Consider refactoring your current code before moving on.
 
 > Note: If you are going to attempt these advanced deliverables, please be sure to have a working commit with all the Core Deliverables first!
 
 As a user, I can:
 - Clicks on a `Reset Calories` button to set calories to `0`. Persist calories value to the server and update the DOM.
+- Change character's name
+- Add a new character
 
 ## Rubric
 
@@ -63,7 +55,7 @@ As a user, I can:
 
 4. Structured HTML creation code cleanly and in a reusable way, using a semantically correct HTML structure without any unnecessary elements.
 
-5. Completed at least one Advanced Deliverable.
+5. All of the above, plus completed at least one Advanced Deliverable.
 
 ### Events
 
@@ -75,7 +67,7 @@ As a user, I can:
 
 4. Structured code in a clean and reusable way, splitting functions, using descriptive names and using target properties effectively.
 
-5. Completed at least one Advanced Deliverable.
+5. All of the above, plus completed at least one Advanced Deliverable.
 
 ### Communication with the Server
 
@@ -87,4 +79,4 @@ As a user, I can:
 
 4. Code structured in a clean and reusable way, splitting into functions and reusing them where needed, with clear function and variable naming.
 
-5. Completed at least one Advanced Deliverable.
+5. All of the above, plus completed at least one Advanced Deliverable.
