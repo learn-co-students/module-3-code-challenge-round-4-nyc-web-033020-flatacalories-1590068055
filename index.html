@@ -13,15 +13,15 @@
         
         <div class = "characterInfo">
             <div id="detailed-info">
-                <p>Character's Name</p>
-                <img src="https://www.spicyauctiontemplates.com/samples/blue/insertimagehere.gif"><!-- display character image here -->
-                <h4>Total Calories: Character's Calories</h4>
-                <form>
+                <p id="name">Character's Name</p>
+                <img id="image" src="https://www.spicyauctiontemplates.com/samples/blue/insertimagehere.gif"><!-- display character image here -->
+                <h4>Total Calories: <span id="calories">Character's Calories</span> </h4>
+                <form id="calories-form">
                     <input type="hidden" value="Character's id" id="characterId"/> <!-- Assign character id as a value here -->
                     <input type="text" placeholder="Enter Calories"/>
                     <input type="submit" value="Add Calories"/>
                 </form>
-                <button>Reset Calories</button>
+                <button id="reset-btn">Reset Calories</button>
             </div>
         </div>
         <script src="src/index.js"></script>
