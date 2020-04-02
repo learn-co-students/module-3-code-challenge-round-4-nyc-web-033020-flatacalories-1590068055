@@ -4,7 +4,7 @@ Today you'll be building an app for counting calories!! You will be using a loca
 ## Demo
 Use this gif as an example of how the app should work.
 
-![Demo](demo.gif)
+![Demo](assets/demo.gif)
 
 ## Setup
 

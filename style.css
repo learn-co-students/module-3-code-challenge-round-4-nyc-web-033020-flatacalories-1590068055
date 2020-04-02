@@ -1,34 +1,40 @@
+.logo{
+  text-align: center;
+  background-color: rgb(49, 109, 179);
+}
+
 .dropdown {
-    background-color: rgb(49, 109, 179);
-    color: white;
-    padding: 16px;
-    border: none;
-    text-align: center;
-  }
+  background-color: rgb(49, 109, 179);
+  color: white;
+  padding: 1%;
+  padding-top: 0px;
+  border: none;
+  text-align: center;
+}
 
-  .dropdown>select, input {
-      font-size: 20px;
-      font-family:Verdana, Geneva, Tahoma, sans-serif;
-  }
+.dropdown>select, input {
+  font-size: 20px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
 
-  .characterInfo{
-      height: 550px;
-      padding: 30px;
-      font-size: 24px;
-      font-family:Verdana, Geneva, Tahoma, sans-serif;
-      border: dotted;
-      text-align: center;
-    }
+.characterInfo{
+  height: 550px;
+  padding: 30px;
+  font-size: 24px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  border: dotted;
+  text-align: center;
+}
 
-   input[type="submit"], button{
-    background-color: rgb(49, 109, 179);
-    color: white;
-    font-size: 18px;
-    border-radius: 6px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-  }
+input[type="submit"], button{
+  background-color: rgb(49, 109, 179);
+  color: white;
+  font-size: 18px;
+  border-radius: 6px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
 
-  img{
-      width: 300px;
-      height: 300px;
-  }
+#image{
+  width: 300px;
+  height: 300px;
+}
