@@ -6,9 +6,8 @@ const nameTag = document.querySelector('#name')
 const imageTag = document.querySelector('#image')
 const caloriesTag = document.querySelector('#calories')
 
+//view character in div
 function viewCharacter(obj){
-
-
     nameTag.innerHTML = `${obj.name}`
     imageTag.src = `${obj.image}`
     caloriesTag.innerHTML = `${obj.calories}`
@@ -17,7 +16,7 @@ function viewCharacter(obj){
 fetch(url).then(res => res.json()).then(char => characterSelector(char))
 
 
-/// adding and reseting calories 
+/// adding and reseting calories and name change
 document.addEventListener('click', function(e){
     e.preventDefault()
     const form = document.querySelector('form')
@@ -89,7 +88,6 @@ document.addEventListener('click', function(e){
                     }         
             })
         })
-
     }
 })
 
@@ -98,7 +96,7 @@ document.addEventListener('click', function(e){
 
 
 
-
+///populate option selecter with character names 
  function characterSelector(array){
     array.forEach(character => {
       const optionTag = document.createElement('option')
