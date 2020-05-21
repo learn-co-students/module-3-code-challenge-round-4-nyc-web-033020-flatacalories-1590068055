@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded',() => {
     const baseURL = 'http://localhost:3000'
     const charURL = `${baseURL}/characters`
     const charDropdown = document.getElementById('character-names') 
+
+    const charId = document.getElementById('id')
     const charName = document.getElementById('name')
     const charImage = document.getElementById('image')
     const charCalories = document.getElementById('calories')
@@ -31,15 +33,18 @@ document.addEventListener('DOMContentLoaded',() => {
     }
     
 
-    charDropdown.addEventListener('change', function(e) {
-        const currentSelect = e.target.value
-        fetch(`${charURL}/${currentSelect}`)
+    charDropdown.addEventListener('change', function (e) {
+        // console.dir(e.target)
+        const currentSelect = getElementsBy(e.target.value)
+        // array.find(
+        fetch(`${charURL}/${id}`)
         .then(resp => resp.json())
+        // .then(console.log())
         .then(character => {
-            id = 
-            charName = document.getElementById('name')
-            charImage = document.getElementById('image')
-            charCalories = 
+            charId = character.id
+            charName = character.name
+            charImage = character.image
+            charCalories = character.calories
         })
 
     })
