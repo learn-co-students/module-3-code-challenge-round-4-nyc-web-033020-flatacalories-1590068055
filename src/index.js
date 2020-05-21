@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const url = 'http://localhost:3000/characters'
-    const charUrl = 'http://localhost:3000/characters/'
+    const charUrl = 'http://localhost:3000/characters'
 
     //make a GET request and render all characters' names in a dropdown menu
     const getCharacters = () => {
@@ -19,19 +19,36 @@ document.addEventListener('DOMContentLoaded', () => {
             select.add(newOption)
 
             document.addEventListener('change', (e) => {
-                if(e.target.dataset.id === char.id) {
+                if(e.target.options === dataset.id) {
+                    dataset.id
                     fetch(`${charUrl}/${char.id}`)
                         .then(resp => resp.json())
-                        .then(renderSingleChar)
+                        // .then(console.log(char))
+                        //     {
+                        //     const infoDiv = document.querySelector('#detailed-info')
+                        //     const name = document.querySelector('#name')
+                        //     name.textContent = `${char.name}`
+                        //     const image = document.querySelector('#image')
+                        //     image.textContent = `${char.image}`
+                        //     const calories = document.querySelector('#calories')
+                        //     calories.textContent = `${char.calories}`
+                        // })
                 }
             })
         })
     }
 
-    const renderSingleChar = (char) => {
-        const infoDiv = document.querySelector('#detailed-info')
+    // const renderSingleChar = (char) => {
+        // const infoDiv = document.querySelector('#detailed-info')
+        // const name = document.querySelector('#name')
+        // name.textContent = `${char.name}`
+        // const image = document.querySelector('#image')
+        // image.textContent = `${char.image}`
+        // const calories = document.querySelector('#calories')
+        // calories.textContent = `${char.calories}`
+
         
-    } 
+    // } 
 
     //add event listener for selecting character from dropdown
     //make GET request with ID of char and display in detailed info div
