@@ -1,6 +1,9 @@
 function runWebApp() {
   const charDropdown = document.getElementById("character-names")
+  const infoDiv = document.getElementById("detailed-info")
+  const caloriesForm = document.getElementById("calories-form")
   const baseUrl = "http://localhost:3000/characters/"
+  let displayChar = 0
 
   function fetchChars() {
     fetch(baseUrl)
@@ -10,6 +13,20 @@ function runWebApp() {
 
   function fetchChar(id) {
     fetch(baseUrl + id)
+      .then(res => res.json())
+      .then(json => displayCharInfo(json))
+  }
+
+  function postCalories(id, calories) {
+    fetch(baseUrl + id, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "calories": calories
+      })
+    })
       .then(res => res.json())
       .then(json => displayCharInfo(json))
   }
@@ -29,19 +46,29 @@ function runWebApp() {
   }
 
   function displayCharInfo(char) {
-    console.dir(charInfoElements)
+    const infoDivChildren = infoDiv.children
+    displayChar = char.id
+
+    infoDivChildren[0].innerHTML = char.name
+    infoDivChildren[1].src = char.image
+    infoDivChildren[2].innerHTML = char.calories
   }
 
   fetchChars()
 
   charDropdown.addEventListener("change", e => {
-    const selectedIndex = e.target.options.selectedIndex
-    console.dir(e.target)
-    console.dir(e.target.selectedOptions[0].dataset.action)
-    console.dir(selectedIndex)
-    if (e.target.dataset.action === "show") {
-      fetchChar(e.target.dataset.id)
+    const selectedOption = e.target.selectedOptions[0]
+
+    if (selectedOption.dataset.action === "show") {
+      fetchChar(selectedOption.dataset.id)
     }
+  })
+
+  caloriesForm.addEventListener("submit", e => {
+    e.preventDefault()
+    // console.log(e.target.calories.value)
+
+    postCalories(displayChar, e.target.calories.value)
   })
 }
 
