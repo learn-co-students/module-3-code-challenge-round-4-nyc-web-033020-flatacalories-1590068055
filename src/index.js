@@ -2,11 +2,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 const url = 'http://localhost:3000/characters'
 const selecter = document.querySelector('#character-names')
+const nameTag = document.querySelector('#name')
+const imageTag = document.querySelector('#image')
+const caloriesTag = document.querySelector('#calories')
 
 function viewCharacter(obj){
-    const nameTag = document.querySelector('#name')
-    const imageTag = document.querySelector('#image')
-    const caloriesTag = document.querySelector('#calories')
+
 
     nameTag.innerHTML = `${obj.name}`
     imageTag.src = `${obj.image}`
@@ -64,6 +65,31 @@ document.addEventListener('click', function(e){
                     }         
             })
         })
+    } else if (e.target.innerText == 'Click to Edit!'){
+        const editBox = document.createElement('input')
+         nameTag.appendChild(editBox)
+         e.target.innerText = 'Click to Submit'
+    } else if (e.target.innerText == 'Click to Submit'){
+        const newValue = nameTag.querySelector('input').value
+        fetch(url).then(res => res.json()).then(characters => {
+            characters.forEach(character => {
+                    if (character.name == characterEating){
+                        const id = character.id 
+                           console.log(`${url}/${id}`)
+                           fetch(`${url}/${id}`, {
+                            method: 'PATCH',
+                            headers: {
+                                "content-type": "application/json",
+                                accept: "application/json"
+                            }, 
+                            body: JSON.stringify({
+                                name: newValue
+                            })
+                        }).then(res => res.json()).then(whatever => viewCharacter(whatever))
+                    }         
+            })
+        })
+
     }
 })
 
