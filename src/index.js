@@ -6,9 +6,9 @@
         //√ fetch single character
         //√ load elements
     // clicking "add calories" adds calories to currently selected character in info panel
-        // add event listener for calorie button
-        // fetch PATCH calories to selected character
-        // update DOM with new calorie values
+        // √add event listener for calorie button
+        // √fetch PATCH calories to selected character
+        // √update DOM with new calorie values
 
 const CHAR_URL = "http://localhost:3000/characters"
 document.addEventListener("DOMContentLoaded", ()=> {
@@ -24,10 +24,34 @@ document.addEventListener("DOMContentLoaded", ()=> {
     caloriesForm.addEventListener('submit', (e)=>{
         e.preventDefault()
         const updatedCharId = document.querySelector('#characterId').value
-        addCaloriestoChar(updatedCharId)
+        const addedCalories = parseInt(document.querySelector('#calories-form').children[1].value)
+        addCaloriestoChar(updatedCharId, addedCalories)
     })
 
 })
+
+const addCaloriestoChar = (charId, addedCalories) => {
+    fetch(`${CHAR_URL}/${charId}`)
+    .then(r => r.json())
+    .then(char => {
+        const newCalorieTotal = addedCalories + char.calories
+        fetch(`${CHAR_URL}/${charId}`,{
+            method: "PATCH",
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+            body: JSON.stringify({
+                calories: newCalorieTotal
+            })
+        })
+        .then(r => r.json())
+        .then(char =>{
+            document.querySelector('#calories').textContent = char.calories
+        })
+    }) 
+
+}
 
 
 
