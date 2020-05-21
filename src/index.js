@@ -37,7 +37,7 @@ PSEUDO CODE
 #####################
 Advanced Deliverables
 
-Clicks on a `Reset Calories` button to set calories to `0`. Persist calories value to the server and update the DOM.
+√ Clicks on a `Reset Calories` button to set calories to `0`. Persist calories value to the server and update the DOM.
 
 Change character's name
 
@@ -56,17 +56,28 @@ const caloriesForm = document.querySelector('#calories-form')
 caloriesForm.children[2].id = "submit"
 const addCalorieBtn = document.querySelector('#submit')
 const resetCaloriesBtn = document.querySelector('#reset-btn')
+
 populateDropdown()
 
 resetCaloriesBtn.addEventListener('click', event => {
-    console.log(event.target)
+    const charId = event.target.dataset.id
+
+    fetch(`${url}/${charId}`, {
+        method: 'PATCH',
+        headers: urlHeaders,
+        body: JSON.stringify({
+            calories: 0
+        })
+    })
+    .then(resp => resp.json())
+    .then(updateCalories)
 })
 
 caloriesForm.addEventListener('submit', event => {
-    event.preventDefault()
+    
     const charId = event.target.children[0].id
     let currentCalories = document.querySelector('#calories').textContent
-    const calorieNumField = event.target.children[1].value
+    let calorieNumField = event.target.children[1].value
     const calorieTotal = (parseInt(calorieNumField, 10) + parseInt(currentCalories, 10))
     
     fetch(`${url}/${charId}`, {
@@ -77,7 +88,9 @@ caloriesForm.addEventListener('submit', event => {
         })
     })
     .then(resp => resp.json())
-    .then(updateCalories)
+    .then(console.log)
+    event.preventDefault()
+    
 })
 
 dropdown.addEventListener('change', event => {
@@ -98,6 +111,7 @@ function changeDisplay(event){
                 divImage.src = char.image
                 divCalories.textContent = char.calories 
                 caloriesForm.children[0].id = char.id
+                resetCaloriesBtn.dataset.id = char.id
             }
         })
     })
@@ -129,3 +143,5 @@ function populateDropdown(){
         })
     })
 }
+
+
