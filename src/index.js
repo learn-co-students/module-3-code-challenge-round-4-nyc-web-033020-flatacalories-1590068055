@@ -3,6 +3,14 @@ let characterArray = []
 const detailedInfo = document.querySelector('#detailed-info')
 const characterNameDropDown = document.querySelector('#character-names')
 
+const addCalorieButton = document.querySelector('#calories-form')
+
+function addCalorie{
+    addCalorieButton.addEventListener('click',)
+} 
+// if addCalorieButton.value === 'submit'
+// add
+
 
 fetch('http://localhost:3000/characters')
     .then(r => r.json())
