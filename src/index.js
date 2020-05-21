@@ -1,7 +1,6 @@
 const _CHARURL = 'http://localhost:3000/characters'
 const characterDropdown = document.querySelector("#character-names")
-
-
+const charactersInfo = document.getElementById("detailed-info")
 
 //See all character's name in the dropdown menu by requesting data from the server
 
@@ -17,15 +16,41 @@ fetchCharacters()
 const populateDropdown = characters => {
     characters.forEach(character => {
         console.log(character)
-        const characterLi = document.createElement('option')
-        characterDropdown.appendChild(characterLi)
-        characterLi.innerHTML = `${character.name}`
+        const characterOption = document.createElement('option')
+        characterDropdown.appendChild(characterOption)
+        characterOption.innerHTML = `${character.name}`
+        characterOption.
     })
 }
+characterDropdown.addEventListener('change', event => {
+    console.log(event.target.value)
 
-//Select a character from drop down menu and see character's info inside 
-//#detailed-info div.
+    
+//see character's info
+//add statement to capture diff selections
+charactersInfo.innerHTML = `
+<p id="name">${character.name}</p>
+<img id="image" src=${character.image}><!-- display character image here -->
+<h4>Total Calories: <span id="calories">Character's Calories</span> </h4>
+<form id="calories-form">
+<input type="hidden" value="${character.id}" id="characterId"/> <!-- Assign character id as a value here -->
+<input type="text" placeholder="Enter Calories"/>
+<input type="submit" value="Add Calories"/>
+</form>
+`
+
+
+})
+
+//const populateCharacterDiv = characters => {
         //2.) populate detailed info with w/ character info
+//}
+
+
+
+
+
+
 //Clicks on "Add Calories" button to add calories to a Character. 
         //3.) add event listener to add calories button to increase calories
 //Persist calories value to the server and update the DOM.
