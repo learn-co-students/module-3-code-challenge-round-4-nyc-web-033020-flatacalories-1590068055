@@ -26,9 +26,10 @@ document.addEventListener('DOMContentLoaded',() => {
             charDropdown.append(charEntry)
         })
     }
-    charDropdown.addEventListener('click', event=> {
-        if (event.target.className === 'showSelect'){
-            
+
+    document.addEventListener('click', function(e) {
+        if (e.target.className === 'showSelect'){
+            console.log("hi")
         }
     })
 
