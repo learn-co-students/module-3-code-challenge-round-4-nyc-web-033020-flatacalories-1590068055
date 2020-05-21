@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     .then(charData => renderCharacter(charData))
     // .then((data)=>{console.log(data)})
     function renderCharacter(charData){
-        dropdown.innerHTML = ""
+        dropdown.innerHTML = `<option selected disabled>Select a Character</option>`
         charData.forEach((char)=>{
             let option = document.createElement('option')
             option.innerText = char.name
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             console.log(url+`/`+updateID)
             fetch(url+`/`+updateID,{
                 method: "PATCH",
-                header: {"Content":"application/json"},
+                header: {"content-type":"application/json"},
                 body: JSON.stringify({
                     id: updateID,
                     name: updateName,
@@ -63,10 +63,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     calories: updateCalories
                 })
             })
+            .then(response=> response.json())
+            charInfo.querySelector("#calories-form").reset()
             fetch(url)
             .then(response => response.json())
             .then(charData => renderCharacter(charData))
-            charInfo.querySelector("#calories-form").reset()
         })
     }
 })
