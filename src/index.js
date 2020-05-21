@@ -17,7 +17,7 @@ function runWebApp() {
       .then(json => displayCharInfo(json))
   }
 
-  function postCalories(id, calories) {
+  function patchCalories(id, calories) {
     fetch(baseUrl + id, {
       method: "PATCH",
       headers: {
@@ -46,12 +46,15 @@ function runWebApp() {
   }
 
   function displayCharInfo(char) {
-    const infoDivChildren = infoDiv.children
     displayChar = char.id
-
-    infoDivChildren[0].innerHTML = char.name
-    infoDivChildren[1].src = char.image
-    infoDivChildren[2].innerHTML = char.calories
+    const charNameElem = infoDiv.querySelector("p")
+    const charImgElem = infoDiv.querySelector("img")
+    const charSpanElem = document.getElementById("calories")
+    
+    charNameElem.innerHTML = char.name
+    charImgElem.src = char.image
+    console.dir(charSpanElem)
+    charSpanElem.innerHTML = char.calories
   }
 
   fetchChars()
@@ -66,9 +69,15 @@ function runWebApp() {
 
   caloriesForm.addEventListener("submit", e => {
     e.preventDefault()
-    // console.log(e.target.calories.value)
 
-    postCalories(displayChar, e.target.calories.value)
+    patchCalories(displayChar, e.target.calories.value)
+    caloriesForm.reset()
+  })
+
+  infoDiv.addEventListener("click", e => {
+    if (e.target.id === "reset-btn") {
+      patchCalories(displayChar, 0)
+    }
   })
 }
 
