@@ -10,16 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const getChar = () => {
         fetch(baseUrl)
         .then(res => res.json())
-        .then(allDogs)
+        .then(allChars)
     }
 
-    const allDogs = dogs => {
-        // const dogList = 
+    const allChars = chars => {
+
+        const charLi = document.createElement('li')
         dropDown.addEventListener('click', event => {
-            dogs.forEach(dog => {
-                option.innerHTML = `${dog.name}`
+            chars.forEach(char => {
+                charLi.innerHTML = char.name
             })
         })
+        option.append(charLi)
     }
 
  
