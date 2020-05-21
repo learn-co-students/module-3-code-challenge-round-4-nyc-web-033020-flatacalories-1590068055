@@ -11,6 +11,10 @@
         // √update DOM with new calorie values
 
 const CHAR_URL = "http://localhost:3000/characters"
+const headers = {
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+}
 document.addEventListener("DOMContentLoaded", ()=> {
     const charSelect = document.querySelector("#character-names")
     const caloriesForm = document.querySelector("#calories-form")
@@ -24,6 +28,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     caloriesForm.addEventListener('submit', (e)=>{
         e.preventDefault()
         const updatedCharId = document.querySelector('#characterId').value
+        // Line 32 looks at the value of the input field of the calorie form
         const addedCalories = parseInt(document.querySelector('#calories-form').children[1].value)
         addCaloriestoChar(updatedCharId, addedCalories)
     })
@@ -37,10 +42,7 @@ const addCaloriestoChar = (charId, addedCalories) => {
         const newCalorieTotal = addedCalories + char.calories
         fetch(`${CHAR_URL}/${charId}`,{
             method: "PATCH",
-            headers:{
-                "Content-Type":"application/json",
-                "Accept":"application/json"
-            },
+            headers: headers,
             body: JSON.stringify({
                 calories: newCalorieTotal
             })
@@ -93,6 +95,5 @@ const makeSingleCharacterOption = (character) =>{
     const charSelect = document.querySelector("#character-names")
     const newCharOption = document.createElement('option')
     newCharOption.textContent = character.name
-    newCharOption.dataset.charId = character.id
     charSelect.append(newCharOption)
 }
