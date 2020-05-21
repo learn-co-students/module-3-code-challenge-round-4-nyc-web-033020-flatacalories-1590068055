@@ -18,6 +18,7 @@ const headers = {
 document.addEventListener("DOMContentLoaded", ()=> {
     const charSelect = document.querySelector("#character-names")
     const caloriesForm = document.querySelector("#calories-form")
+    const resetBtn = document.querySelector('#reset-btn')
     loadCharacters()
 
     charSelect.addEventListener('change', (e)=>{
@@ -33,7 +34,28 @@ document.addEventListener("DOMContentLoaded", ()=> {
         addCaloriestoChar(updatedCharId, addedCalories)
     })
 
+    resetBtn.addEventListener('click', (e)=>{
+        const resetCharCalId = document.querySelector('#characterId').value
+        resetCalories(resetCharCalId)
+    })
+
 })
+
+const resetCalories = (charId) => {
+    fetch(`${CHAR_URL}/${charId}`,{
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({
+            calories: 0
+        })
+    })
+    .then(r => r.json())
+    .then(char =>{
+        document.querySelector('#calories').textContent = char.calories
+    })
+}
+
+// These functions add calories from the from to the character's object in the database
 
 const addCaloriestoChar = (charId, addedCalories) => {
     fetch(`${CHAR_URL}/${charId}`)
