@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const url = 'http://localhost:3000/characters'
     const charactersDropdown = document.querySelector('#character-names')
-    const detailedInfoDiv = document.querySelector('#detailed-info')
+    // const detailedInfoDiv = document.querySelector('#detailed-info')
+    const form = document.querySelector('#calories-form')
 
     //function to fetch all characters (GET)
     const getAllCharacters = () => {
@@ -53,6 +54,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             name.textContent = character.name
             name.dataset.id = character.id
             calories.textContent = character.calories
+            calories.dataset.calories = character.calories
+            //add dataset to form so you can patch correct record
+            form.dataset.id = character.id
 
         }
 
@@ -77,6 +81,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
             getIndivCharacter(id)
         }
 
+    })
+
+    //Event listener for form submission
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        const id = e.target.dataset.id
+        let inputCalories = document.querySelector('input[type="text"]')
+        let currentCalories = document.querySelector('#calories')
+
+        currentCalories = parseInt(currentCalories.textContent)
+        inputCalories = parseInt(inputCalories.value)
+        
+        const totalCalories = (currentCalories + inputCalories)
+        console.log(totalCalories)
+
+        //patch request to correct character, update calories
+        fetch(`${url}/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+
+            },
+            body: JSON.stringify({
+                calories: totalCalories
+            })
+        })
     })
 
 });
