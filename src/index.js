@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     .then(charData => renderCharacter(charData))
     // .then((data)=>{console.log(data)})
     function renderCharacter(charData){
+        dropdown.innerHTML = ""
         charData.forEach((char)=>{
             let option = document.createElement('option')
             option.innerText = char.name
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         charInfo.innerHTML = 
                         `<p id="name">${char.name}</p>
                         <img id="image" src="${char.image}"><!-- display character image here -->
-                        <h4>Total Calories: <span id="calories">${char.calories}</span> </h4>
+                        <h4>Total Calories: <span id="current-calories">${char.calories}</span> </h4>
                         <form id="calories-form">
                             <input type="hidden" value="${char.id}" id="${char.id}"/> <!-- Assign character id as a value here -->
                             <input id= "calories" type="text" placeholder="Enter Calories"/>
@@ -44,12 +45,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
         document.addEventListener('submit', function(event){
             event.preventDefault()
-            let calorieChange = caloriesForm.children[1].value
+            let calorieChange = document.querySelector("#calories").value
             let updateName = charInfo.querySelector("#name").innerText
-            let updateImage = charInfo.querySelector("#image")
-            // console.log(updateID)
-
-            fetch(url+`${charInfo}`)
+            let updateImage = charInfo.querySelector("#image").src
+            let updateID = charInfo.querySelector("#calories-form").children[0].value
+            let currentCalories = charInfo.querySelector("#current-calories").innerText
+            let updateCalories = Number(currentCalories) + Number(calorieChange)
+            console.log(updateID)
+            console.log(url+`/`+updateID)
+            fetch(url+`/`+updateID,{
+                method: "PATCH",
+                header: {"Content":"application/json"},
+                body: JSON.stringify({
+                    id: updateID,
+                    name: updateName,
+                    image: updateImage,
+                    calories: updateCalories
+                })
+            })
+            fetch(url)
+            .then(response => response.json())
+            .then(charData => renderCharacter(charData))
+            charInfo.querySelector("#calories-form").reset()
         })
     }
 })
