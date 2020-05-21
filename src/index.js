@@ -88,7 +88,7 @@ caloriesForm.addEventListener('submit', event => {
         })
     })
     .then(resp => resp.json())
-    .then(console.log)
+    .then(updateCalories)
     event.preventDefault()
     
 })
