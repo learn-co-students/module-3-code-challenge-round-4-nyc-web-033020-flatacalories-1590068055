@@ -37,7 +37,7 @@ selectMenu.addEventListener('change', (e) => {
 });
 
 const addCharacterToDetailedInfo = (character) => {
-  const namePar = document.getElementById('detailed-info')
+  const namePar = document.getElementById('name')
   const characterImg = document.getElementById('image')
   const caloriesSpan = document.getElementById('calories')
   const formIdInput = document.getElementById('characterId')
@@ -47,3 +47,18 @@ const addCharacterToDetailedInfo = (character) => {
   caloriesSpan.textContent = character.calories
   formIdInput.value = character.id
 };
+
+document.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const form = e.target
+  const characterId = form.children[0].value
+  const characterCalories = parseInt(document.getElementById('calories').textContent)
+  // const characterCalories = form.parentNode.children[2].children[0]
+
+  // console.log(characterCalories)
+  const formData = {
+    calories: 
+  }
+  console.log(form)
+  form.reset()
+});
