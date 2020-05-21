@@ -13,38 +13,33 @@ function viewCharacter(obj){
     caloriesTag.innerHTML = `${obj.calories}`
 }
 
-
-viewCharacter('something')
-
-
 fetch(url).then(res => res.json()).then(char => characterSelector(char))
 
 document.addEventListener('click', function(e){
     e.preventDefault()
     if (e.target.value == 'Add Calories'){
             const form = document.querySelector('form')
-            const addedCals = form.querySelectorAll('input')[1].value
-            const currentCals = document.querySelector('#calories')
-            console.log(currentCals + addedCals)
+            const addedCals = parseInt(form.querySelectorAll('input')[1].value)
+            const currentCals = parseInt(document.querySelector('#calories').innerHTML)
+            const newTotalCals = currentCals + addedCals
             const characterEating = selecter.value
                 fetch(url).then(res => res.json()).then(characters => {
                     characters.forEach(character => {
                             if (character.name == characterEating){
-                                const id = character.id 
-                                console.log(id)
+                                   const id = character.id 
+                                   fetch(`${url}/${id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        "content-type": "appliaction/json",
+                                        accept: "appliaction/json"
+                                    }, 
+                                    body: JSON.stringify({
+                                        "calories": newTotalCals
+                                    })
+                                })
                             }         
                     })
                 })
-        // fetch(`${url}/${id}`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         "content-type": "appliaction/json",
-        //         accept: "appliaction/json"
-        //     }, 
-        //     body: JSON.stringify({
-        //         calories
-        //     })
-        // })
     }
 })
 
