@@ -3,9 +3,8 @@
         // √√fetch characters
         // √add options to dropdown
     // load character info panel when their name option is clicked
-        // fetch single character
-        // build elements
-        // add to DOM
+        //√ fetch single character
+        //√ load elements
     // clicking "add calories" adds calories to currently selected character in info panel
         // add event listener for calorie button
         // fetch PATCH calories to selected character
@@ -14,6 +13,7 @@
 const CHAR_URL = "http://localhost:3000/characters"
 document.addEventListener("DOMContentLoaded", ()=> {
     const charSelect = document.querySelector("#character-names")
+    const caloriesForm = document.querySelector("#calories-form")
     loadCharacters()
 
     charSelect.addEventListener('change', (e)=>{
@@ -21,21 +21,25 @@ document.addEventListener("DOMContentLoaded", ()=> {
         findAndLoadChar(selectedChar)
     })
 
+    caloriesForm.addEventListener('submit', (e)=>{
+        e.preventDefault()
+        const updatedCharId = document.querySelector('#characterId').value
+        addCaloriestoChar(updatedCharId)
+    })
+
 })
+
+
+
+// These functions help the event listener load the info panel for an individual character
 
 const findAndLoadChar = (characterName) =>{
     fetch(CHAR_URL)
     .then(r => r.json())
     .then(characters =>{
-        // characters.forEach(char => console.log(char.image))
         const fullChar = characters.filter(character=>{
             return character.name === characterName
         })
-        console.log(fullChar[0])
-        // document.querySelector('#detailed-info').dataset.id = fullChar[0].id
-        // document.querySelector('#name').textContent = fullChar[0].name
-        // document.querySelector('#image').src = fullChar[0].image
-        // document.querySelector('#calories').textContent = fullChar[0].calories
         loadInfoPanel(fullChar[0])
     })
 }
@@ -45,6 +49,7 @@ const loadInfoPanel = (char) =>{
     document.querySelector('#name').textContent = char.name
     document.querySelector('#image').src = char.image
     document.querySelector('#calories').textContent = char.calories
+    document.querySelector('#characterId').value = char.id
 }
 
 
