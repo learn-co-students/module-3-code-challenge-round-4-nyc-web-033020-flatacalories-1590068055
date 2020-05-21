@@ -65,7 +65,7 @@ form.addEventListener('submit', function(event){
     
    const id = input1.value
 
-console.log(   input1.value )
+console.log( input1.value )
 
 //    fetch(`http://localhost:3000/characters/${id}`, {
 //        method:"PATCH", 
