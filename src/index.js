@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const url = "http://localhost:3000/characters"
     const dropdown = document.querySelector('#character-names')
     const charInfo = document.querySelector("#detailed-info")
+    const caloriesForm = document.querySelector('#calories-form')
+    const addingCalories = document.querySelector('#calories')
 
     
     fetch(url)
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     if (event.target.value === char.name){
                         charInfo.innerHTML = 
                         `<p id="name">${char.name}</p>
-                        <img id="image${char.id}" src="${char.image}"><!-- display character image here -->
+                        <img id="image" src="${char.image}"><!-- display character image here -->
                         <h4>Total Calories: <span id="calories">${char.calories}</span> </h4>
                         <form id="calories-form">
                             <input type="hidden" value="${char.id}" id="${char.id}"/> <!-- Assign character id as a value here -->
@@ -42,9 +44,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
         document.addEventListener('submit', function(event){
             event.preventDefault()
-            let addingCalories = document.querySelector('#calories')
-            let caloriesForm = document.querySelector('#calories-form')
-            fetch(url+`/${}`
+            let calorieChange = caloriesForm.children[1].value
+            let updateName = charInfo.querySelector("#name").innerText
+            let updateImage = charInfo.querySelector("#image")
+            // console.log(updateID)
+
+            fetch(url+`${charInfo}`)
         })
     }
 })
