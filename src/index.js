@@ -21,15 +21,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.addEventListener('submit', (event) => {
   if (event.target.getAttribute('id') === 'calories-form') {
     event.preventDefault()
-    // console.log(event)
-    // console.log(event.target)
     const inputs = event.target.querySelectorAll('input')
     const characterId = inputs[0].value
     const calories = parseInt(inputs[1].value)
 
     const caloriesSpan = event.target.parentElement.querySelector('#calories')
     const oldCalories = parseInt(caloriesSpan.textContent)
-    console.log(characterId, calories, oldCalories)
 
     fetch(`${url}/${characterId}`, {
       method: 'PATCH',
@@ -42,6 +39,8 @@ document.addEventListener('submit', (event) => {
       })
     }).then(res => res.json())
     .then(character => {
+      // We could also let the event default behavior run, which would reload the page
+      // Technically not foolproof, though
       caloriesSpan.textContent = character.calories
     })
   }
@@ -51,7 +50,6 @@ function displayCharacter(characterId, div) {
   fetch(`${url}/${characterId}`)
     .then(res => res.json())
     .then(character => {
-      // console.log(character)
       div.querySelector('#name').textContent = character.name
       div.querySelector('#image').setAttribute('src', character.image)
       div.querySelector('#calories').textContent = character.calories
