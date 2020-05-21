@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = 'http://localhost:3000/characters'
     const dropDown = document.getElementById('character-names')
     const detailedInfo = document.getElementById('detailed-info')
-    const name = document.getElementById('name')
-    const image = document.getElementById('img')
+
 
     const getChar = () => {
         fetch(baseUrl)
@@ -24,17 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    // const charInfo = chars => {
-        dropDown.addEventListener('click', event => {
-                event.target.forEach(info => {
-                    name.innerHTML = `${info.name}`
-                    image.innerHTML = `${info.image}`
-                })
-            detailedInfo.append
-        })
-    // }
+        dropDown.addEventListener('change', (event) => {
+            const name = document.querySelector('#name')
+            const image = document.querySelector('#image')
+            console.log(event.target)
+            name.textContent = `${event.srcElement.value}`
+            // image.textContent = `${event.target.value}`
+          })
    
-   
+    // const selectElement = document.querySelector('.character-info')
+
+  
 
 
 
