@@ -77,6 +77,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		const calorieDelta = e.target.querySelector("input[type='number']").value;
 		const newCalories = Number(currentCalories) + Number(calorieDelta);
 
+		updateCalories(id, newCalories);
+	});
+
+	// Reset Calories
+	const resetButton = document.getElementById('reset-btn');
+	resetButton.addEventListener('click', () => {
+		const currentCharacterId = document.getElementById('characterId').value;
+		updateCalories(currentCharacterId, 0)
+	})
+
+	// Delegate function to handle patch
+	const updateCalories = (id, newCalories) => {
+	
 		// Metadata
 		const data = {
 			headers: _HEADERS,
@@ -88,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Handle PATCH
 		fetch(url, data)
 		.then(res => res.json() )
-		.then( character => populateCharacterDetails(character.id) )
-
-
-
-	});
+		.then( character => {
+			populateCharacterDetails(character.id);
+			document.getElementById('calories-form').reset()
+		});
+	};
 
 	getCharacters();
 })
