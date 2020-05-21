@@ -34,16 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
 			const characterOption = document.createElement('option');
 
 			characterOption.textContent = character.name;
-			characterOption['data-id'] = character.id;
+
+			characterOption.dataset.id = character.id;
 
 			dropdown.appendChild(characterOption)
 		});
-	};
 
-	// Create change event listener for dropdown
-	dropdown.addEventListener('change', e => {
-		console.log(e.target.dataset)
-	})
+		// Create change event listener for dropdown
+		dropdown.addEventListener('change', e => {
+			
+			// Retrieve the id of the selected characted from the dataset of the option of the dropdown
+			const characterId = e.target.options[e.target.selectedIndex].dataset.id;
+		});
+
+	};
 
 
 	getCharacters();
