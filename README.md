@@ -26,6 +26,7 @@ The endpoints you will need are:
 
 As a user, I can:
 
+
 1. See all character's name in the dropdown menu by **requesting** data from the server
 
 2. Select a character from drop down menu and see character's info inside `#detailed-info` div. 
