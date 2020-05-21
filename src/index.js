@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-
 // if (e.target.value === "Mr. Cute") {
         //     const id = e.target.selectedIndex
         //     getIndivCharacter(id) //pass id so you can fetch correct char
