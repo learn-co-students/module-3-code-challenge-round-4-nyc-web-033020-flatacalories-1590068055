@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', e =>{
     // console.log('page loaded')
     const BASEURL = 'http://localhost:3000'
     const dropDownElement = document.querySelector('#character-names')
+    const characters = document.querySelector('option')
 
     fetch(`${BASEURL}/characters`)
     .then(res => res.json())
@@ -16,17 +17,30 @@ document.addEventListener('DOMContentLoaded', e =>{
 
         characters.forEach(character => {
             const characterOption = document.createElement('option')
-            characterOption.dataset.id = character.id
-            characterOption.innerText = character.name
+            // console.dir(characterOption)
+            d
+            // dropDownElement.dataset.id = character.id
+            characterOption.value = characterOption.name
+            characterOption.textContent = character.name
 
             dropDownElement.append(characterOption)
-            console.log(characterOption)
+            // console.log(characterOption)
         });
 
 
     })
+    
+    dropDownElement.addEventListener('change', e => {
+        console.log(e.target)
+        const character = e.target
+        const characterId = dropDownElement.dataset.id
+        console.log(characterId)
 
-    dropDownElement.addEventListener
+
+
+
+
+    })
 
 
 
