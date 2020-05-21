@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function(){
         const characterOptions = document.getElementById("character-names") 
         characters.forEach(character => {
             const characterSelect = document.getElementById("character-names").value 
-            document.getElementById("name").innerHTML = characterSelect 
             characterSelect.id = character.id 
             characterSelect.innerText = character.name 
             characterOptions.append(characterSelect) 
@@ -30,8 +29,16 @@ document.addEventListener("DOMContentLoaded", function(){
         })
     } 
 
-    function renderCharacter(character) {
+    function renderCharacter(char) {
         const characterInfo = document.getElementById("characterInfo") 
         const detailedInfo = document.getElementById("detailed-info") 
+        detailedInfo.dataset.char = char.id 
+        let charName = document.getElementById("name") 
+        charName.innerHTML = char.name 
+        let charImage = document.getElementById("image") 
+        charImage.src = char.image 
+        let charCalories = document.getElementById("calories") 
+        charCalories.innerText = `${char.calories} Calories` 
+        const calorieForm = document.getElementById('calories-form') 
     }
 })
