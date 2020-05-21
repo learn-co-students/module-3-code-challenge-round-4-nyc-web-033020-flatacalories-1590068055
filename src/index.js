@@ -5,27 +5,32 @@
 
 // addEventlistener click to see fetched character name in
 // drop down menu
-// addEventListener click for fetched details into character details
-// event delegation??
 
-// addEL click add calories button,
+// addEventListener click for fetched details into character details
+
+// addEventListener click add calories button
+
+// addEventListener click reset calories
+
+// event delegation?? if dropdown, add, reset
+
+//
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const dropdown = document.querySelector('#dropdown')
 
-  const charDetails = document.querySelector
 
   fetch("http://localhost:3000/characters")
   .then(res => res.json())
-  .then(data => console.log(data[1]))
+  .then(data => console.log(data))
 
-  // const renderCharacters = characters => {
-  //   characters.forEach( char => {
-  //     const charSelection = dropdown
+  const renderCharacters = characters => {
+    characters.forEach( char => {
+      const
 
-  //   })
-  // }
+    })
+  }
 
 // document.addEventListener('click'), event => {
 //   if(event.target.button.value === "Add Calories" {
