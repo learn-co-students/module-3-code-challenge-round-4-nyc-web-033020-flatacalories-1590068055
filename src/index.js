@@ -34,9 +34,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //event listener for change in dropdown
     charactersDropdown.addEventListener('change', (e) => {
         // console.log(e.target.value)
-        // console.dir(e.target)
+        // console.dir(e.target.value)
 
-        
+        //need to get value of dataset id and then make get request to that character
+
+        const getIndivCharacter = (id) => {
+            fetch(`${url}/${id}`)
+                .then(resp => resp.json())
+                .then(json => renderCharacter(json))
+        }
+
+        const renderCharacter = (character) => {
+            const image = document.querySelector('#image')
+            const name = document.querySelector('#name')
+            const calories = document.querySelector('#calories')
+
+            image.src = character.image
+            name.textContent = character.name
+            name.dataset.id = character.id
+            calories.textContent = character.calories
+
+        }
+
+        // refactor this later if time
+        if (e.target.value === "Mr. Cute") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        } else if (e.target.value === "Mr. Monkey") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        } else if (e.target.value === "Miss. Zebra") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        } else if (e.target.value === "Master Lion") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        } else if (e.target.value === "Mr. Panda") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        } else if (e.target.value === "Mrs. Monkey") {
+            const id = e.target.selectedIndex
+            getIndivCharacter(id)
+        }
+
     })
 
 });
