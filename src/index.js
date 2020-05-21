@@ -79,7 +79,7 @@ const updateCharacter = (id, newData) => {
   .then(character => {
     // console.log(character)
     // console.log(detailedInfoDiv)
-    const calories = document.getElementById("calories").textContent
-    calories = character.calories     
+    console.log(character.calories)
+    document.getElementById("calories").textContent = character.calories
   })
 };
