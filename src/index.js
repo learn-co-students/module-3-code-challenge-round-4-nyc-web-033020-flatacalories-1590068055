@@ -5,7 +5,7 @@
 
 //   BONUS DELIVERABLES
 // [X] reset calories button function (patch)
-// [] edit chars name (patch)
+// [] edit chars name (get/post)
 // [] add new char (post)
 
 
@@ -19,14 +19,14 @@ fetch(URL)
 .then(res => res.json())
 .then(chars => renderDropdown(chars))
 resetCals()
-createChar()
+editChar()
 })
 
 const renderDropdown = chars => {
     chars.forEach(char => {
-        // dropdown.setAttribute('data-num', `${char.id}`)
         const option = document.createElement('option')
         option.textContent = char.name
+        option.setAttribute('data-num', `${char.id}`)
         dropdown.append(option)
         dropdown.addEventListener('change', e=> {
             if (e.target.value === char.name){ 
@@ -82,12 +82,41 @@ const editChar = () => {
     newDiv.style.paddingTop = '20px'
     newDiv.innerHTML =
     `
-    <button id="createCharacter">Create New Character</button>
+    <button id="editCharacter">Edit Character</button>
     `
     dropdownDiv.append(newDiv)
-    const createBtn = document.querySelector('#createCharacter')
-    createBtn.addEventListener('click', e => {
-
+    const editForm = document.createElement('form')
+    editForm.setAttribute('id', 'editForm')
+    editForm.style.display = 'none'
+    editForm.style.paddingTop = '20px'
+    editForm.innerHTML = 
+    `
+    <input type="text" id="charName"/>
+    <br>
+    <input type="text" id="charImage"/>
+    <br>
+    <input type="text" id="charCalories"/>
+    <br>
+    <input type="submit" value="Update" style="margin-top:10px;"/>
+    `
+    newDiv.append(editForm)
+    const editBtn = document.querySelector('#editCharacter')
+    editBtn.addEventListener('click', e => {
+        editForm.style.display = 'block'
+        
+        // e.preventDefault()
+        // fetch(URL, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         // "name": ,
+        //         // "image": ,
+        //         // "calories": 
+        //     })
+        // })
     })
 }
 

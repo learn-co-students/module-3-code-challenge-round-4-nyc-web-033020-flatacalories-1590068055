@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Mr. Monkey",
       "image": "https://thumbs.gfycat.com/FatalInnocentAmericanshorthair-max-1mb.gif",
-      "calories": 234
+      "calories": 623
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "id": 4,
       "name": "Master Lion",
       "image": "http://bestanimations.com/Animals/Mammals/Cats/Lions/animated-lion-gif-11.gif",
-      "calories": 653
+      "calories": null
     },
     {
       "id": 5,
@@ -34,7 +34,7 @@
       "id": 6,
       "name": "Mrs. Monkey",
       "image": "https://cdn.dribbble.com/users/1832502/screenshots/4387756/monkeyanim.gif",
-      "calories": 678
+      "calories": 22
     }
   ]
 }
