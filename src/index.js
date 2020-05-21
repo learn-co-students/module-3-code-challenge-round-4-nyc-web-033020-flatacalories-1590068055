@@ -52,13 +52,32 @@ document.addEventListener('submit', (e) => {
   e.preventDefault()
   const form = e.target
   const characterId = form.children[0].value
-  const characterCalories = parseInt(document.getElementById('calories').textContent)
+  const characterCalories = parseInt(document.getElementById('calories').textContent, 10)
   // const characterCalories = form.parentNode.children[2].children[0]
+  caloriesSum = parseInt(form.children[1].value, 10) + characterCalories
 
-  // console.log(characterCalories)
+  // console.log(caloriesSum)
   const formData = {
-    calories: 
+    calories: caloriesSum
   }
-  console.log(form)
+
+  updateCharacter(characterId, formData)
+
   form.reset()
 });
+
+const updateCharacter = (id, newData) => {
+  fetch(`${charactersUrl}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(newData)
+  })
+  .then(resp => resp.json())
+  .then(character => {
+    let calories = parseInt(document.getElementById("calories"), 10)
+    calories = character.calories     
+  })
+};
