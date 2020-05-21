@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const image = document.getElementById('image')
     const calories = document.getElementById('calories')
     const form = document.getElementById('calories-form')
-
+    
     fetch('http://localhost:3000/characters')
     .then(resp => resp.json())
     .then(characters => {
@@ -15,13 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
             select.appendChild(option)
         })
     })
-
+    
     select.addEventListener('change', (e) => {
+        const formId = document.getElementById('characterId')
         let characterId = e.target.dataset.id 
         let collection = e.target.children
         for( element of collection){
             if( e.target.value === element.innerHTML){
                 characterId = element.id
+                formId.value = element.id
             }
         }
         fetch(`http://localhost:3000/characters/${characterId}`)
@@ -30,28 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
             name.innerHTML = character.name
             image.src = character.image
             calories.innerHTML = character.calories
-
-            // let characterCal = calories.innerHTML
-            form.addEventListener('submit', (e) => {
-                e.preventDefault()
-                fetch(`http://localhost:3000/characters/${characterId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        calories: parseInt(calories.innerHTML) + parseInt(e.target[1].value)
-                    }),
-                }).then(resp => resp.json())
-                .then(character => {
-                    console.log(character)
-                })
-                
-            })
         })
     })
 
-
-
-
+            
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        fetch(`http://localhost:3000/characters/${event.target[0].value}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                calories: parseInt(calories.innerHTML) + parseInt(event.target[1].value)
+            }),
+        }).then(resp => resp.json())
+        .then(character => {
+            calories.innerHTML = character.calories
+        })
+        form.reset()
+    })
 })
