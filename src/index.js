@@ -55,9 +55,12 @@ const detailedDiv = document.querySelector('#detailed-info')
 const caloriesForm = document.querySelector('#calories-form')
 caloriesForm.children[2].id = "submit"
 const addCalorieBtn = document.querySelector('#submit')
-
-
+const resetCaloriesBtn = document.querySelector('#reset-btn')
 populateDropdown()
+
+resetCaloriesBtn.addEventListener('click', event => {
+    console.log(event.target)
+})
 
 caloriesForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -74,15 +77,11 @@ caloriesForm.addEventListener('submit', event => {
         })
     })
     .then(resp => resp.json())
-    .then(char => {
-        currentCalories = char.calories
-    })
+    .then(updateCalories)
 })
 
 dropdown.addEventListener('change', event => {
-
     changeDisplay(event)
-
 })
 
 let divName = document.querySelector('#name')
@@ -102,7 +101,19 @@ function changeDisplay(event){
             }
         })
     })
-}  
+} 
+
+function updateCalories(){
+    fetch(url)
+    .then(resp => resp.json())
+    .then(characters => {
+        characters.forEach(char => {
+            if (char.name === divName){
+                divCalories.textContent = char.calories 
+            }
+        })
+    })
+}
 
 function populateDropdown(){
     fetch(url)
