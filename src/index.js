@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function(){
 const url = 'http://localhost:3000/characters'
 const selecter = document.querySelector('#character-names')
 
-console.log(selecter)
-
 function viewCharacter(obj){
     const nameTag = document.querySelector('#name')
     const imageTag = document.querySelector('#image')
@@ -21,7 +19,34 @@ viewCharacter('something')
 
 fetch(url).then(res => res.json()).then(char => characterSelector(char))
 
-document.addEventListener('click',)
+document.addEventListener('click', function(e){
+    e.preventDefault()
+    if (e.target.value == 'Add Calories'){
+            const form = document.querySelector('form')
+            const addedCals = form.querySelectorAll('input')[1].value
+            const currentCals = document.querySelector('#calories')
+            console.log(currentCals + addedCals)
+            const characterEating = selecter.value
+                fetch(url).then(res => res.json()).then(characters => {
+                    characters.forEach(character => {
+                            if (character.name == characterEating){
+                                const id = character.id 
+                                console.log(id)
+                            }         
+                    })
+                })
+        // fetch(`${url}/${id}`, {
+        //     method: 'PATCH',
+        //     headers: {
+        //         "content-type": "appliaction/json",
+        //         accept: "appliaction/json"
+        //     }, 
+        //     body: JSON.stringify({
+        //         calories
+        //     })
+        // })
+    }
+})
 
 
 
