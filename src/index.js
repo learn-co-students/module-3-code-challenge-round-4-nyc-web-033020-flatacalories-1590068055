@@ -89,7 +89,7 @@ document.addEventListener("click", (e) => {
   const characterId = resetButton.previousElementSibling.children[0].value
   if(e.target === resetButton){
     updateCharacter(characterId, {
-      calories: caloriesSum
+      calories: 0
     })
   };
 });
