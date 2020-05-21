@@ -9,12 +9,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // Render Character Names 
     function renderCharacters(characters) {
-        const characterOptions = document.getElementById("character-names") 
+        const characterMenu = document.getElementById("character-names") 
         characters.forEach(character => {
             const characterSelect = document.getElementById("character-names").value 
+            let characterOption = document.createElement("option") 
+            console.log(characterOption)
+            characterSelect = document.getElementById("name") 
             characterSelect.id = character.id 
-            characterSelect.innerText = character.name 
-            characterOptions.append(characterSelect) 
+            characterSelect.innerText = character.name  
+            characterMenu.appendChild(characterSelect)  
         }) 
     } 
 
@@ -39,6 +42,6 @@ document.addEventListener("DOMContentLoaded", function(){
         charImage.src = char.image 
         let charCalories = document.getElementById("calories") 
         charCalories.innerText = `${char.calories} Calories` 
-        const calorieForm = document.getElementById('calories-form') 
-    }
+        detailedInfo.append(charName, charImage, charCalories) 
+    } 
 })
