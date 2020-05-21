@@ -1,4 +1,6 @@
 const charactersUrl = "http://localhost:3000/characters"
+const selectMenu = document.getElementById("character-names")
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const addCharactersToSelect = (characters) => {
-  const selectMenu = document.getElementById("character-names")
+  
   characters.forEach(character => {
     const characterOption = createCharacterOption(character)
     selectMenu.appendChild(characterOption)
@@ -22,3 +24,11 @@ const createCharacterOption = (character) => {
   characterOption.textContent = `${character.name}`
   return characterOption
 };
+
+selectMenu.addEventListener('change', (e) => {
+  
+  // console.log(e.target)
+  // console.log(e.target[e.target.options.selectedIndex].dataset.characterId)
+  const characterId = e.target[e.target.options.selectedIndex].dataset.characterId
+
+});
