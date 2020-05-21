@@ -31,6 +31,20 @@ function runWebApp() {
       .then(json => displayCharInfo(json))
   }
 
+  function patchName(id, name) {
+    fetch(baseUrl + id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "name": `${name}`
+      })
+    })
+      .then(res => res.json())
+      .then(json => displayCharInfo(json))
+  }
+
   function displayChars(chars) {
     chars.forEach(char => addCharToSelect(char))
   }
@@ -53,7 +67,6 @@ function runWebApp() {
     
     charNameElem.innerHTML = char.name
     charImgElem.src = char.image
-    console.dir(charSpanElem)
     charSpanElem.innerHTML = char.calories
   }
 
@@ -67,11 +80,15 @@ function runWebApp() {
     }
   })
 
-  caloriesForm.addEventListener("submit", e => {
+  infoDiv.addEventListener("submit", e => {
     e.preventDefault()
 
-    patchCalories(displayChar, e.target.calories.value)
-    caloriesForm.reset()
+    if (e.target.id === "calories-form") {
+      patchCalories(displayChar, e.target.calories.value)
+      caloriesForm.reset()
+    } else if (e.target.id === "edit-name-form") {
+      patchName(displayChar, e.target.name.value)
+    }
   })
 
   infoDiv.addEventListener("click", e => {
