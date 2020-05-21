@@ -18,6 +18,7 @@ const _HEADERS = {
 document.addEventListener("DOMContentLoaded", () => {
 
 	const dropdown = document.getElementById('character-names');	
+	const calorieForm = document.getElementById('calories-form');
 	
 	// GET all characters, pass to populateDropdown
 	const getCharacters = () => {
@@ -63,15 +64,35 @@ document.addEventListener("DOMContentLoaded", () => {
 			viewName.textContent = character.name;
 			viewImgUrl.src = character.image;
 			viewCalories.textContent = character.calories;
-			caloriesFormId.value = characterId;
+			caloriesFormId.value = id;
 		});
 	};
 
 	// Create event listener for the calories form
-	document.addEventListener('submit', e => {
+	calorieForm.addEventListener('submit', e => {
 		e.preventDefault();
-		const calorieDelta = e.target.querySelector("input[type='number']");
-	})
+
+		const currentCalories = document.getElementById('calories').textContent;
+		const id = document.getElementById('characterId').value;
+		const calorieDelta = e.target.querySelector("input[type='number']").value;
+		const newCalories = Number(currentCalories) + Number(calorieDelta);
+
+		// Metadata
+		const data = {
+			headers: _HEADERS,
+			method: "PATCH",
+			body: JSON.stringify({ calories: newCalories })
+		};
+		const url = `http://localhost:3000/characters/${id}`;
+
+		// Handle PATCH
+		fetch(url, data)
+		.then(res => res.json() )
+		.then( character => populateCharacterDetails(character.id) )
+
+
+
+	});
 
 	getCharacters();
 })
