@@ -70,14 +70,16 @@ const updateCharacter = (id, newData) => {
   fetch(`${charactersUrl}/${id}`, {
     method: "PATCH",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
       "Accept": "application/json"
     },
     body: JSON.stringify(newData)
   })
   .then(resp => resp.json())
   .then(character => {
-    let calories = parseInt(document.getElementById("calories"), 10)
+    // console.log(character)
+    // console.log(detailedInfoDiv)
+    const calories = document.getElementById("calories").textContent
     calories = character.calories     
   })
 };
