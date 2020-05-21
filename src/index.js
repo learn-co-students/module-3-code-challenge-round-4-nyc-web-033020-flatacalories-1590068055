@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     calories: updateCalories
                 })
             })
-            .then(response=> response.json())
             charInfo.querySelector("#calories-form").reset()
             fetch(url)
             .then(response => response.json())
