@@ -3,15 +3,11 @@ let characterArray = []
 const detailedInfo = document.querySelector('#detailed-info')
 const characterNameDropDown = document.querySelector('#character-names')
 
-function getAllCharacters(chars) {
-    
-}
 
 fetch('http://localhost:3000/characters')
     .then(r => r.json())
     .then(actualCharacters => {
         characterArray = actualCharacters
-        console.log(characterArray)
     }) 
 
 
@@ -25,3 +21,6 @@ fetch('http://localhost:3000/characters')
 //to a Character. Persist calories value to the server 
 // and update the DOM.
 
+
+
+// i have to study alot more :(
