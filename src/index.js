@@ -14,11 +14,32 @@ const renderDropdown = chars => {
         option.textContent = char.name
         dropdown.append(option)
         dropdown.addEventListener('change', e=> {
-            const charImg = document.querySelector('#image')
-            console.log(charImg)
+            if (e.target.value === char.name){                
+                const charImg = document.querySelector('#image')
+                charImg.src = `${char.image}`
+                charImg.previousElementSibling.textContent = char.name
+            }
         })
     })
 }
+
+document.addEventListener('submit', e => {
+    e.preventDefault()
+    const calForm = document.querySelector('#calories-form')
+    let calories = document.querySelector('#calories')
+    let newCals = calForm.firstElementChild.nextElementSibling.value
+    calories.textContent = newCals
+    fetch(URL + e.target.id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            "calories": 1
+        })
+    })
+})
 
 
 
@@ -26,5 +47,5 @@ const renderDropdown = chars => {
 
 //   MAIN DELIVERABLES
 // [X] list char names in dropdown (get)
-// [] listener 'change' will display will show char in #detailed-info div
+// [X] listener 'change' will display will show char in #detailed-info div
 // [] form.input.value will replace #calories.textContent upon 'submit'
