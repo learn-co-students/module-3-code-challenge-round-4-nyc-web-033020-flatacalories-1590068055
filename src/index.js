@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 .then(json => renderCharacter(json))
         }
 
+        //function to render characters to detailed info div
         const renderCharacter = (character) => {
             const image = document.querySelector('#image')
             const name = document.querySelector('#name')
@@ -54,25 +55,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         // Determine which character is selected. Refactor this later if time
-        if (e.target.value === "Mr. Cute") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id) //pass id so you can fetch correct char
-        } else if (e.target.value === "Mr. Monkey") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id)
-        } else if (e.target.value === "Miss. Zebra") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id)
-        } else if (e.target.value === "Master Lion") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id)
-        } else if (e.target.value === "Mr. Panda") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id)
-        } else if (e.target.value === "Mrs. Monkey") {
-            const id = e.target.selectedIndex
-            getIndivCharacter(id)
-        }
+
+        const id = (charactersDropdown.options[e.target.selectedIndex].dataset.id) //gets dataset/db id of seleted index
+        
+        //invoke function that makes GET request to ind. character and updates DOM
+        getIndivCharacter(id)
+
+        //below (at bottom of file) if/else statements: was NOT a robust solution but was working. Keeping in case there are bugs in above solution that I haven't found when testing app. In that case if/else statements would need to be put in this change event listener.
+        
 
     })
 
@@ -111,8 +101,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //function to update the DOM (total calories) after its persisted to DB
     const updateCalories = (character) => {
         const caloriesSpan = document.querySelector('#calories')
-        console.log(character.calories)
         caloriesSpan.textContent = character.calories
     }
 
 }); //DOMLOADED event listener
+
+
+
+
+// if (e.target.value === "Mr. Cute") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id) //pass id so you can fetch correct char
+        // } else if (e.target.value === "Mr. Monkey") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id)
+        // } else if (e.target.value === "Miss. Zebra") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id)
+        // } else if (e.target.value === "Master Lion") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id)
+        // } else if (e.target.value === "Mr. Panda") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id)
+        // } else if (e.target.value === "Mrs. Monkey") {
+        //     const id = e.target.selectedIndex
+        //     getIndivCharacter(id)
+        // }
