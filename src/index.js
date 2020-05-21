@@ -11,24 +11,35 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // const BaseURL = "http://localhost:3000"
-  // const CharURL = `${BaseURL}/characters`
+  const dropdown = document.querySelector('#dropdown')
 
-  fetch("http://localhost:3000")
+  fetch("http://localhost:3000/characters")
   .then(res => res.json())
 
-  const renderCharacters = characters => {
-    characters.forEach()
+  // const renderCharacters = characters => {
+  //   characters.forEach( char => {
+  //     const charSelection = dropdown
 
+  //   })
+  // }
+
+document.addEventListener('click'), event => {
+  if(event.target.button.value === "Add Calories" {
 
   }
 
-  const dropdown = document.querySelector('#dropdown')
-
-  dropdown.append()
+}
 
 
 
 
+  // dropdown.append('<option selected disabled>Select a Character</option>')
+  // $.getJSON("http://localhost:3000", function (character){
+  //   $.forEach(characters, function (key, entry){
+  //     dropdown.append($('<option></option>').attr('value', "character-names").text(character.name))
+  //   })
+  // })
 
-})
+
+
+}) //last line
