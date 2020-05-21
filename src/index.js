@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const image = document.getElementById('image')
     const calories = document.getElementById('calories')
     const form = document.getElementById('calories-form')
+    const resetBtn = document.getElementById('reset-btn')
     
     fetch('http://localhost:3000/characters')
     .then(resp => resp.json())
@@ -51,5 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             calories.innerHTML = character.calories
         })
         form.reset()
+    })
+
+    resetBtn.addEventListener('click', (e) => {
+        
     })
 })
