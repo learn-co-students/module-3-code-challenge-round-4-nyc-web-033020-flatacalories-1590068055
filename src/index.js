@@ -40,13 +40,30 @@ document.addEventListener('submit', e => {
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            "calories": newCals
+            "calories": parseInt(newCals)
         })
     })
-    .then(res => res.json())
-    .then(console.log)
 })
 
+
+// document.addEventListener('click', e => {
+//     if (e.target.id === 'reset-btn')
+//     calories.textContent = 0
+//     let newCals = calForm.firstElementChild.nextElementSibling.value
+//     calories.textContent = newCals
+//     charId = calForm.firstElementChild.value
+
+//     fetch(URL + '/' + charId, {
+//         method: 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             "calories": parseInt(newCals)
+//         })
+//     })
+// })
 
 
 
@@ -54,4 +71,6 @@ document.addEventListener('submit', e => {
 //   MAIN DELIVERABLES
 // [X] list char names in dropdown (get)
 // [X] listener 'change' will display will show char in #detailed-info div
-// [] form.input.value will replace #calories.textContent upon 'submit'
+// [X] form.input.value will replace #calories.textContent upon 'submit'
+
+//   BONUS DELIVERABLES
