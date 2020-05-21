@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', e =>{
     const BASEURL = 'http://localhost:3000'
     const dropDownElement = document.querySelector('#character-names')
     const characters = document.querySelector('option')
+    const characterName = document.querySelector('#name')
+    const characterName = document.querySelector('#image')
+    const characterName = document.querySelector('#calories')
 
     fetch(`${BASEURL}/characters`)
     .then(res => res.json())
@@ -18,9 +21,9 @@ document.addEventListener('DOMContentLoaded', e =>{
         characters.forEach(character => {
             const characterOption = document.createElement('option')
             // console.dir(characterOption)
-            d
+            
             // dropDownElement.dataset.id = character.id
-            characterOption.value = characterOption.name
+            characterOption.value = character.id
             characterOption.textContent = character.name
 
             dropDownElement.append(characterOption)
@@ -31,10 +34,19 @@ document.addEventListener('DOMContentLoaded', e =>{
     })
     
     dropDownElement.addEventListener('change', e => {
-        console.log(e.target)
-        const character = e.target
-        const characterId = dropDownElement.dataset.id
-        console.log(characterId)
+        const characterId =  e.target.value
+
+
+        fetch(`${BASEURL}/characters/${characterId}`)
+        .then(res => res.json())
+        .then(character => {
+             
+
+
+        })
+    
+
+
 
 
 
