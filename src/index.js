@@ -45,6 +45,23 @@ function runWebApp() {
       .then(json => displayCharInfo(json))
   }
 
+  function postChar(char) {
+    fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "applicatin/json"
+      },
+      body: JSON.stringify(char)
+    })
+      .then(res => res.json())
+      .then(json => {
+        addCharToSelect(json)
+        displayCharInfo(json)
+        console.dir(json)
+      })
+  }
+
   function displayChars(chars) {
     chars.forEach(char => addCharToSelect(char))
   }
@@ -88,6 +105,15 @@ function runWebApp() {
       caloriesForm.reset()
     } else if (e.target.id === "edit-name-form") {
       patchName(displayChar, e.target.name.value)
+    } else if (e.target.id === "new-character-form") {
+      const newChar = {
+        "name": `${e.target.name.value}`,
+        "image": `${e.target.image.value}`,
+        "calories": 0
+      }
+
+      // console.dir(newChar)
+      postChar(newChar)
     }
   })
 
