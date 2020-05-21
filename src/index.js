@@ -29,8 +29,8 @@ PSEUDO CODE
 
 √ Grab the add calories button and set to a const
 √ Add event listener to submit button and preventDefault
-Make a fetch('patch') request containing url headers and body info with calorie change
-    The body will contain the input value of the textField
+√ Make a fetch('patch') request containing url headers and body info with calorie change
+    √ The body will contain the input value of the textField
     Optimistically render the character's new calorie count
 
 
@@ -56,16 +56,15 @@ const caloriesForm = document.querySelector('#calories-form')
 caloriesForm.children[2].id = "submit"
 const addCalorieBtn = document.querySelector('#submit')
 
+
 populateDropdown()
 
 caloriesForm.addEventListener('submit', event => {
-    
+    event.preventDefault()
     const charId = event.target.children[0].id
-    const currentCalories = document.querySelector('#calories').textContent
+    let currentCalories = document.querySelector('#calories').textContent
     const calorieNumField = event.target.children[1].value
     const calorieTotal = (parseInt(calorieNumField, 10) + parseInt(currentCalories, 10))
-    console.log(calorieTotal)
-
     
     fetch(`${url}/${charId}`, {
         method: 'PATCH',
@@ -75,33 +74,35 @@ caloriesForm.addEventListener('submit', event => {
         })
     })
     .then(resp => resp.json())
-    .then(cons)
-
-    event.preventDefault()
+    .then(char => {
+        currentCalories = char.calories
+    })
 })
 
 dropdown.addEventListener('change', event => {
-    let divName = document.querySelector('#name')
-    let divImage = document.querySelector('#image')
-    let divCalories = document.querySelector('#calories')
 
-    changeDisplay()
+    changeDisplay(event)
 
-    function changeDisplay(){
-        fetch(url)
-        .then(resp => resp.json())
-        .then(characters => {
-            characters.forEach(char => {
-                if (char.name === event.target.value){
-                    divName.textContent = char.name
-                    divImage.src = char.image
-                    divCalories.textContent = char.calories 
-                    caloriesForm.children[0].id = char.id
-                }
-            })
-        })
-    }  
 })
+
+let divName = document.querySelector('#name')
+let divImage = document.querySelector('#image')
+let divCalories = document.querySelector('#calories')
+
+function changeDisplay(event){
+    fetch(url)
+    .then(resp => resp.json())
+    .then(characters => {
+        characters.forEach(char => {
+            if (char.name === event.target.value){
+                divName.textContent = char.name
+                divImage.src = char.image
+                divCalories.textContent = char.calories 
+                caloriesForm.children[0].id = char.id
+            }
+        })
+    })
+}  
 
 function populateDropdown(){
     fetch(url)
