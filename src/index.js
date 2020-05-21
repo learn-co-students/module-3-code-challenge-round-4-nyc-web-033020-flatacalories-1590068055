@@ -33,6 +33,20 @@ document.addEventListener('DOMContentLoaded', e =>{
 
 
     })
+
+    // A piece of logic that could be reused?
+    // function renderCharacter(characterInfo) {
+    //     form.reset()
+    //     const name = character.name
+    //     const image = character.image
+    //     const calories = character.calories
+
+    //     formIdPlacement.value = characterId 
+
+    //     characterNameElement.innerText = name
+    //     characterImageElement.src = `${image}`
+    //     characterCaloriesElement.innerText = parseInt(calories)
+    // }
     
     dropDownElement.addEventListener('change', e => {
         const characterId =  e.target.value
