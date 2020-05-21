@@ -27,10 +27,16 @@ const findAndLoadChar = (characterName) =>{
     fetch(CHAR_URL)
     .then(r => r.json())
     .then(characters =>{
+        // characters.forEach(char => console.log(char.image))
         const fullChar = characters.filter(character=>{
             return character.name === characterName
         })
-        loadInfoPanel(fullChar)
+        console.log(fullChar[0])
+        // document.querySelector('#detailed-info').dataset.id = fullChar[0].id
+        // document.querySelector('#name').textContent = fullChar[0].name
+        // document.querySelector('#image').src = fullChar[0].image
+        // document.querySelector('#calories').textContent = fullChar[0].calories
+        loadInfoPanel(fullChar[0])
     })
 }
 
@@ -38,7 +44,7 @@ const loadInfoPanel = (char) =>{
     document.querySelector('#detailed-info').dataset.id = char.id
     document.querySelector('#name').textContent = char.name
     document.querySelector('#image').src = char.image
-    
+    document.querySelector('#calories').textContent = char.calories
 }
 
 
