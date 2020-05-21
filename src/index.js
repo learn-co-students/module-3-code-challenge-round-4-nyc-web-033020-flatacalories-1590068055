@@ -42,7 +42,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     document.addEventListener('click', (e)=>{
         if (e.target.id === 'edit-name'){
+            loadCharEditField()
+        } else if( e.target.id === 'save-name'){
+            e.preventDefault()
             const editCharID = document.querySelector('#detailed-info').dataset.id
+            const newName = document.querySelector('#edit-form').children[0].value
+            console.log(newName)
+            updateCharName(editCharID, newName)
         }
     })
 
@@ -60,8 +66,22 @@ const loadCharacterEditBtn = () =>{
 const loadCharEditField = () => {
     document.querySelector('#edit-name').insertAdjacentHTML(
         'afterend',
-        '<form id="edit-form"><input type="text"></form>'
+        '<form id="edit-form"><input type="text"><button id="save-name">Save</button></form>'
     )
+}
+
+const updateCharName = (charId, newName) =>{
+    fetch(`${CHAR_URL}/${charId}`,{
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({
+            name: newName
+        })
+    })
+    .then(r => r.json())
+    .then(char =>{
+        document.querySelector('#name').textContent = char.name
+    })
 }
 
 // This function resets the selected character's calorie count
