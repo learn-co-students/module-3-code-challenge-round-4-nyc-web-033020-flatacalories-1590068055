@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     function renderImage(showImage) {
-        post.src = showImage.image
-        postName.innerText = showImage.postName
+        const imageShow = document.getElementById('image')
+        const imageName = document.getElementById('name')
+        const calories = document.getElementById('calories')
+        const caloriesForm = document.getElementById('calories-form')
     }
     
     const addChracter = (characterId) => {
@@ -43,6 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 option.innerHTML = <option selected disable>`${character.name}`</option>
                 select.appendChild(option)
             }
+        }
+
+        function postCalories(data) {
+            console.log(data)
+            return fetch(caloriesURL, {
+                method:'POST', 
+                headers: {
+                    'Accept': 'application/json', 
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify(data), 
+            })
+            .then(res => res.json())
         }
 
     }
