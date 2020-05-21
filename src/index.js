@@ -10,7 +10,9 @@ fetch(_CHARURL)
 .then(resp => resp.json())
 .then(json => populateDropdown(json))
 
-fetchCharacters()
+
+ fetchCharacters()
+
 
 //1b.) populate dropdown with server data 
 const populateDropdown = characters => {
@@ -19,20 +21,21 @@ const populateDropdown = characters => {
         characterDropdown.appendChild(characterOption)
         characterOption.innerHTML = `${character.name}`
         characterOption.id = `${character.id}`
-        console.log(character.id)
     })
 }
 characterDropdown.addEventListener('change', event => {
     if (event) {
-    const usersChoice = event.target.selectedOptions[0].id
+    const usersChoice = event.target.selectedOptions[0]
+    console.log(event.target.selectedOptions)
+
     charactersInfo.innerHTML = `
-    <p id="name">${name}</p>
+    <p id="name">${usersChoice.innerText}</p>
     <img id="image" src=${image}><!-- display character image here -->
     <h4>Total Calories: <span id="calories">Character's Calories</span> </h4>
     <form id="calories-form">
-    <input type="hidden" value="$.id}" id="characterId"/> <!-- Assign character id as a value here -->
+    <input type="hidden" value="" id="characterId"/>
     <input type="text" placeholder="Enter Calories"/>
-    < input type="submit" value="Add Calories"/>
+    <input type="submit" value="Add Calories"/>
     </form>
 `
 }
@@ -42,10 +45,6 @@ characterDropdown.addEventListener('change', event => {
 
 
 })
-
-//const populateCharacterDiv = characters => {
-        //2.) populate detailed info with w/ character info
-//}
 
 
 
