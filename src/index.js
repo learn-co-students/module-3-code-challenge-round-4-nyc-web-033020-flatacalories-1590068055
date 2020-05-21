@@ -17,6 +17,7 @@ const animalImage = document.getElementById('image')
 const form = document.getElementsByTagName('form')[0]
 const input1 = form.getElementsByTagName('input')[0]
 
+
 getAnimals()
 function getAnimals(){
 
@@ -31,7 +32,8 @@ function renderAnimals(animals){
         option.value = animal.id
         const calorie = animal.calories
         const picture = animal.image
-        input1.value = animal.id
+      
+      
         dropDown.append(option)
     })
 }
@@ -39,23 +41,29 @@ function renderAnimals(animals){
 dropDown.addEventListener('change', function(event){
 event.preventDefault()
      const id = event.target.value 
+   
 
        fetch(`http://localhost:3000/characters/${id}`)
        .then(r => r.json())
        .then(animal => {
             animalName.innerHTML = animal.name
             animalImage.src = animal.image
-           
+            input1.value = animal.id
+            
         })
+        
 })
 
 
 form.addEventListener('submit', function(event){
     event.preventDefault()
-   
+    
+   const id = input1.value
 
-    // console.log(event.target.parentNode)
-    console.log(input1.value) 
+   fetch(`http://localhost:3000/characters/${id}`, {
+       method:"PATCH", 
+       headers:
+   })
  
  
 })
