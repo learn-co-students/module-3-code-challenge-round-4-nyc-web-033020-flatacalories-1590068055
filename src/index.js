@@ -10,16 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderCharacters = characters => {
         characters.forEach(character => {
             const option = document.createElement("option")
-            option.className =
             option.innerText = `${character.name}`
             selectDrop.append(option)
         })
     }
 
-    document.addEventListener("click", event => {
-        if (event.target.parentNode.id === "character-names")
-            console.log("Im clicking the select drop")
-    })
+    selectDrop.addEventListener("change", event => {
+        option = event.target 
+        console.log(option.value)
+        
+     })
     getCharacters()
 
 
