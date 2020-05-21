@@ -32,23 +32,46 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Create and populate option element for each character
 		characters.forEach(character => {
 			const characterOption = document.createElement('option');
-
 			characterOption.textContent = character.name;
-
+			
+			// Associate the id of this character with their options element
 			characterOption.dataset.id = character.id;
-
 			dropdown.appendChild(characterOption)
 		});
 
 		// Create change event listener for dropdown
 		dropdown.addEventListener('change', e => {
-			
+
 			// Retrieve the id of the selected characted from the dataset of the option of the dropdown
 			const characterId = e.target.options[e.target.selectedIndex].dataset.id;
+			populateCharacterDetails(characterId);
 		});
-
 	};
 
+	// Take the ID of a selected characted, pessimisticaly retreieve that data and populate detail view
+	const populateCharacterDetails = id => {
+		const characterDetails = document.getElementById("detailed-info");
+		const viewName = document.getElementById('name');
+		const viewImgUrl = document.getElementById('image');
+		const viewCalories = document.getElementById('calories');
+		const caloriesFormId = document.getElementById('characterId');
+
+		fetch(`http://localhost:3000/characters/${id}`)
+		.then( res => res.json() )
+		.then( character => {
+			// Populate DOM elements with response
+			viewName.textContent = character.name;
+			viewImgUrl.src = character.image;
+			viewCalories.textContent = character.calories;
+			caloriesFormId.value = characterId;
+		});
+	};
+
+	// Create event listener for the calories form
+	document.addEventListener('submit', e => {
+		e.preventDefault();
+		const calorieDelta = e.target.querySelector("input[type='number']");
+	})
 
 	getCharacters();
 })
