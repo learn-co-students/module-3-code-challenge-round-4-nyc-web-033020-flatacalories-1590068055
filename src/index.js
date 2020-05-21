@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', e =>{
     const characterNameElement = document.querySelector('#name')
     const characterImageElement = document.querySelector('#image')
     const characterCaloriesElement = document.querySelector('#calories')
-    const characterId
+    const formIdPlacement = document.querySelector('#characterId')
 
     fetch(`${BASEURL}/characters`)
     .then(res => res.json())
@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', e =>{
             const image = character.image
             const calories = character.calories
 
+            formIdPlacement.value = characterId 
+
             characterNameElement.innerText = name
             characterImageElement.src = `${image}`
             characterCaloriesElement.innerText = parseInt(calories)
@@ -56,8 +58,37 @@ document.addEventListener('DOMContentLoaded', e =>{
 
     document.addEventListener('submit', e => {
         e.preventDefault()
-        console.log(e)
+        const form = e.target
+        const characterId = form[0].value
+        const newCalories = parseInt(form[1].value)
 
+        const currentCalories = parseInt(characterCaloriesElement.innerText)
+        const totalCalories = currentCalories + newCalories
+
+
+        fetch(`${BASEURL}/characters/${characterId}`, {
+            method: 'PATCH',
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json'
+
+            },
+            body: JSON.stringify({calories: totalCalories})
+        })
+        .then(res => res.json())
+        .then(character => {
+            form.reset()
+            const name = character.name
+            const image = character.image
+            const calories = character.calories
+
+            formIdPlacement.value = characterId 
+
+            characterNameElement.innerText = name
+            characterImageElement.src = `${image}`
+            characterCaloriesElement.innerText = parseInt(calories)
+        
+        })
 
     })
 
