@@ -30,20 +30,24 @@ document.addEventListener('DOMContentLoaded', () => {
             name.innerHTML = character.name
             image.src = character.image
             calories.innerHTML = character.calories
-        })
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            fetch(`http://localhost:3000/characters/${characterId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    calories: 'example'
-                }),
+            // let characterCal = calories.innerHTML
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                fetch(`http://localhost:3000/characters/${characterId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        calories: parseInt(calories.innerHTML) + parseInt(e.target[1].value)
+                    }),
+                }).then(resp => resp.json())
+                .then(character => {
+                    console.log(character)
+                })
+                
             })
-
         })
     })
 
