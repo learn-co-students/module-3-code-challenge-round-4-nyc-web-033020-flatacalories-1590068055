@@ -2,7 +2,7 @@
 
 // [x]1. See all character's name in the dropdown menu by **requesting** data from the server
 
-// 2. Select a character from drop down menu and see character's info inside `#detailed-info` div. 
+// [x]2. Select a character from drop down menu and see character's info inside `#detailed-info` div. 
 
 // 3. Clicks on "Add Calories" button to add calories to a Character. Persist calories value to the server and update the DOM.
 
@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const url = "http://localhost:3000/characters"
     const dropdown = document.querySelector('#character-names')
     const charInfo = document.querySelector("#detailed-info")
+
+    
     fetch(url)
     .then(response => response.json())
     .then(charData => renderCharacter(charData))
@@ -30,13 +32,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         <h4>Total Calories: <span id="calories">${char.calories}</span> </h4>
                         <form id="calories-form">
                             <input type="hidden" value="${char.id}" id="${char.id}"/> <!-- Assign character id as a value here -->
-                            <input type="text" placeholder="Enter Calories"/>
-                            <input type="submit" value="Add Calories"/>
+                            <input id= "calories" type="text" placeholder="Enter Calories"/>
+                            <input id= "add-calories" type="submit" value="Add Calories"/>
                         </form>
                         <button id="reset-btn">Reset Calories</button>`
                     }
                 })
             }
+        })
+        document.addEventListener('submit', function(event){
+            event.preventDefault()
+            let addingCalories = document.querySelector('#calories')
+            let caloriesForm = document.querySelector('#calories-form')
+            fetch(url+`/${}`
         })
     }
 })
