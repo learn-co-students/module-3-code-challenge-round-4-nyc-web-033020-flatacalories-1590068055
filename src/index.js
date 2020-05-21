@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     const caloriesForm = document.querySelector("#calories-form")
     const resetBtn = document.querySelector('#reset-btn')
     loadCharacters()
+    loadCharacterEditBtn()
 
     charSelect.addEventListener('change', (e)=>{
         const selectedChar = e.target.value
@@ -40,6 +41,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
     })
 
 })
+
+const loadCharacterEditBtn = () =>{
+    document.querySelector('#name').insertAdjacentElement('afterend','<button id="edit-name">Edit</button>')
+}
+
+// This function resets the selected character's calorie count
 
 const resetCalories = (charId) => {
     fetch(`${CHAR_URL}/${charId}`,{
