@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetch(charactersUrl)
   .then(resp => resp.json())
-  .then(addCharactersToSelect)
+  .then(characters => {
+    
+    addCharacterToDetailedInfo(characters[0])
+    addCharactersToSelect(characters)
+  })
 
 });
 
@@ -27,8 +31,7 @@ const createCharacterOption = (character) => {
 };
 
 selectMenu.addEventListener('change', (e) => {
-  // console.log(e.target)
-  // console.log(e.target[e.target.options.selectedIndex].dataset.characterId)
+  
   const characterId = e.target[e.target.options.selectedIndex].dataset.characterId
   fetch(`${charactersUrl}/${characterId}`)
   .then(resp => resp.json())
@@ -53,10 +56,9 @@ document.addEventListener('submit', (e) => {
   const form = e.target
   const characterId = form.children[0].value
   const characterCalories = parseInt(document.getElementById('calories').textContent, 10)
-  // const characterCalories = form.parentNode.children[2].children[0]
+
   caloriesSum = parseInt(form.children[1].value, 10) + characterCalories
 
-  // console.log(caloriesSum)
   const formData = {
     calories: caloriesSum
   }
@@ -77,8 +79,6 @@ const updateCharacter = (id, newData) => {
   })
   .then(resp => resp.json())
   .then(character => {
-    // console.log(character)
-    // console.log(detailedInfoDiv)
     console.log(character.calories)
     document.getElementById("calories").textContent = character.calories
   })
