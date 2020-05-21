@@ -22,20 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
             charOption.innerHTML = `${char.name}`
             dropDown.append(charOption)
         })
-
-        chars.forEach(info => {
-            name.innerHTML = `${info.name}`
-            image.innerHTML = `${info.image}`
-        })
-        detailedInfo.append(name, image)
-
     }
 
-    // const characterInfo = charInfo => {
-    //     charInfo.forEach(info => {
-    //         name.innerHTML = `${char.name}`
-    //     })
+    // const charInfo = chars => {
+        dropDown.addEventListener('click', event => {
+                event.target.forEach(info => {
+                    name.innerHTML = `${info.name}`
+                    image.innerHTML = `${info.image}`
+                })
+            detailedInfo.append
+        })
     // }
+   
+   
 
 
 
