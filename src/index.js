@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const object = {
             method: "POST",
             headers: {
-                "Content-Type: application/json",
+                "Content-Type": "application/json",
                 "Accept": 'application/json'
             },
             body: JSON.stringify({"character_id": characterId})
@@ -32,8 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(charactersURL, object)
         .then(res => res.json())
         .then(json => {
-            const option = document.querySelector(`option[data-character-id='${charactersId}']`)
+            const option = document.querySelector(`option[data-character-id='${charactersId}']`).parentElement.lastChild
+            renderCharacter(option, json)
         })
+
+        const renderCharacter = (option, character) => {
+            if (character.name !==undefined) {
+                const select= getElementsById("character-names")
+                const option = document.createElement('option')
+                option.innerHTML = <option selected disable>`${character.name}`</option>
+                select.appendChild(option)
+            }
+        }
 
     }
 
