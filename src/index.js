@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const  postName = document.getElementById("name")
     console.log(postName)
     const post = document.getElementById("image")
+    console.log(post)
     const imageLink = "http://localhost:3000/characters"
-    const imageId = 1
-    
+ 
     fetch(imageLink)
     .then(resp => resp.json())
     .then(image => {
