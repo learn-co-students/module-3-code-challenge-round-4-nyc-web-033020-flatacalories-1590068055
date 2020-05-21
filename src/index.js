@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded',() => {
     const baseURL = 'http://localhost:3000'
     const charURL = `${baseURL}/characters`
     const charDropdown = document.getElementById('character-names') 
+    const charName = document.getElementById('name')
+    const charImage = document.getElementById('image')
+    const charCalories = document.getElementById('calories')
 
     const getChar = () => {
         fetch(charURL)
@@ -26,11 +29,19 @@ document.addEventListener('DOMContentLoaded',() => {
             charDropdown.append(charEntry)
         })
     }
+    
 
-    document.addEventListener('click', function(e) {
-        if (e.target.className === 'showSelect'){
-            console.log("hi")
-        }
+    charDropdown.addEventListener('change', function(e) {
+        const currentSelect = e.target.value
+        fetch(`${charURL}/${currentSelect}`)
+        .then(resp => resp.json())
+        .then(character => {
+            id = 
+            charName = document.getElementById('name')
+            charImage = document.getElementById('image')
+            charCalories = 
+        })
+
     })
 
 
