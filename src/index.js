@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const url = 'http://localhost:3000/characters'
     const charactersDropdown = document.querySelector('#character-names')
-    // const detailedInfoDiv = document.querySelector('#detailed-info')
     const form = document.querySelector('#calories-form')
 
     //function to fetch all characters (GET)
@@ -24,21 +23,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
         //loop through all characters/populate dropdown
         for (const character of data) {
-            // console.log(character.name)
             charactersDropdown.innerHTML += `
                 <option value="${character.name}" data-id="${character.id}">${character.name}</option>
             `
-        }
-        
+        }  
     }
 
     //event listener for change in dropdown
     charactersDropdown.addEventListener('change', (e) => {
-        // console.log(e.target.value)
-        // console.dir(e.target.value)
 
         //need to get value of dataset id and then make get request to that character
-
         const getIndivCharacter = (id) => {
             fetch(`${url}/${id}`)
                 .then(resp => resp.json())
@@ -55,15 +49,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             name.dataset.id = character.id
             calories.textContent = character.calories
             calories.dataset.calories = character.calories
-            //add dataset to form so you can patch correct record
+            //add dataset to form so you can patch correct record. [Update] Did not see hidden field in HTML at first. If time I will use that
             form.dataset.id = character.id
-
         }
 
-        // refactor this later if time
+        // Determine which character is selected. Refactor this later if time
         if (e.target.value === "Mr. Cute") {
             const id = e.target.selectedIndex
-            getIndivCharacter(id)
+            getIndivCharacter(id) //pass id so you can fetch correct char
         } else if (e.target.value === "Mr. Monkey") {
             const id = e.target.selectedIndex
             getIndivCharacter(id)
@@ -87,6 +80,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault()
 
+        //Did not realize there was a hidden field. If I have time I will update id to poplate the hidden field
         const id = e.target.dataset.id
         let inputCalories = document.querySelector('input[type="text"]')
         let currentCalories = document.querySelector('#calories')
@@ -114,11 +108,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             .then(form.reset())
     })
 
+    //function to update the DOM (total calories) after its persisted to DB
     const updateCalories = (character) => {
-        // console.log(character)
         const caloriesSpan = document.querySelector('#calories')
         console.log(character.calories)
         caloriesSpan.textContent = character.calories
     }
 
-});
+}); //DOMLOADED event listener
