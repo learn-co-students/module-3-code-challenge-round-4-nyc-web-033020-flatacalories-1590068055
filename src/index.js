@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){
     const characterMenu = document.getElementById("dropdown") 
     const characterDetails = document.getElementById("character-info") 
+    document.addEventListener("click", handleEvents)
+    const calorieForm = document.getElementById("calories-form") 
     function getCharacters() {
         fetch('http://localhost:3000/characters') 
             .then(resp => resp.json()) 
@@ -17,14 +19,15 @@ document.addEventListener("DOMContentLoaded", function(){
             characterSelect = document.getElementById("name") 
             characterSelect.id = character.id 
             characterSelect.innerText = character.name  
-            characterMenu.appendChild(characterSelect)  
+            characterOption.appendChild(characterSelect)
+            characterMenu.appendChild(characterOption)  
         }) 
     } 
 
     // Listen for dropdown option select. 
     function characterShow() {
-        const characterOptions = document.getElementById("character-names") 
-        characterOptions.addEventListener("click", e => {
+        const characterMenu = document.getElementById("character-names") 
+        characterMenu.addEventListener("click", e => {
             const character_id = e.target.id 
             fetch(`http://localhost:3000/characters/${character_id}`) 
                 .then(resp => resp.json()) 
@@ -44,4 +47,45 @@ document.addEventListener("DOMContentLoaded", function(){
         charCalories.innerText = `${char.calories} Calories` 
         detailedInfo.append(charName, charImage, charCalories) 
     } 
+
+    function handleEvents(e) {
+        e.preventDefault() 
+        if (e.target === "submit") {
+            editChar(id) 
+        } else if (e.target === calorieForm) {
+            calorieEventHandler(e) 
+        }
+    } 
+
+    function editChar(id) {
+        fetch(`http://localhost:3000/characters/${id}`) 
+            .then(res => res.json()) 
+            .then(character => {
+                calorieForm.id.value = character.id,
+                calorieForm.calories.value = character.calories 
+            })
+    }
+
+    function calorieEventHandler(e) {
+        let character = {
+            name: e.target.parentElement.name.value, 
+            calories: e.target.parentElement.calories.value 
+        } 
+
+        fetch(`http://localhost:3000/characters/${e.target.parentElement.dataset.id}`, {
+            method: "PATCH", 
+            headers: {
+                'Content-Type': "application/json", 
+                Accept: "application/json"
+            }, 
+            body: JSON.stringify(character) 
+        }) 
+        .then(res => res.json()) 
+        .then(character => {
+            let characterFound = document.querySelector('characterId') 
+            characterFound.children[0].innerText = character.name 
+            characterFound.children[1].innerText = character.calories  
+        })
+    }
+
 })
