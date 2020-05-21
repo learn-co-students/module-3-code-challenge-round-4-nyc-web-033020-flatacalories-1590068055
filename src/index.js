@@ -16,6 +16,10 @@ const animalName = document.getElementById('name')
 const animalImage = document.getElementById('image')
 const form = document.getElementsByTagName('form')[0]
 const input1 = form.getElementsByTagName('input')[0]
+const input2 = form.getElementsByTagName('input')[0]
+const input3 = form.getElementsByTagName('input')[2]
+
+
 
 
 getAnimals()
@@ -49,6 +53,7 @@ event.preventDefault()
             animalName.innerHTML = animal.name
             animalImage.src = animal.image
             input1.value = animal.id
+            // input2.placeholder = animal.calories
             
         })
         
@@ -60,9 +65,15 @@ form.addEventListener('submit', function(event){
     
    const id = input1.value
 
+console.log(   input2.value )
+
    fetch(`http://localhost:3000/characters/${id}`, {
        method:"PATCH", 
-       headers:
+       headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify()
    })
  
  
