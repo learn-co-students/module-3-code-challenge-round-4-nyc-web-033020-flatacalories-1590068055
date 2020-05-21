@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const url = 'http://localhost:3000/characters'
     const charactersDropdown = document.querySelector('#character-names')
     const form = document.querySelector('#calories-form')
+    const resetBtn = document.querySelector('#reset-btn')
+    const calories = document.querySelector('#calories')
+    const name = document.querySelector('#name')
 
     //function to fetch all characters (GET)
     const getAllCharacters = () => {
@@ -41,9 +44,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         //function to render characters to detailed info div
         const renderCharacter = (character) => {
+            //name and calories are reused in other func. and therefore put above in scope
             const image = document.querySelector('#image')
-            const name = document.querySelector('#name')
-            const calories = document.querySelector('#calories')
 
             image.src = character.image
             name.textContent = character.name
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault()
 
-        //Did not realize there was a hidden field. If I have time I will update id to poplate the hidden field
+        //Did not realize there was a hidden field in HTML. If I have time I will update id to poplate the hidden field instead of setting dataset property on the form
         const id = e.target.dataset.id
         let inputCalories = document.querySelector('input[type="text"]')
         let currentCalories = document.querySelector('#calories')
@@ -79,23 +81,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
         inputCalories = parseInt(inputCalories.value)
         
         const totalCalories = (currentCalories + inputCalories)
-        // console.log(totalCalories)
 
         //patch request to correct character, update calories
-        fetch(`${url}/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-
-            },
-            body: JSON.stringify({
-                calories: totalCalories
+        const characterUpdateFetch = (id) => {
+            fetch(`${url}/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+    
+                },
+                body: JSON.stringify({
+                    calories: totalCalories
+                })
             })
-        })
-            .then(resp => resp.json())
-            .then(json => updateCalories(json))
-            .then(form.reset())
+                .then(resp => resp.json())
+                .then(json => updateCalories(json))
+                .then(form.reset())
+        }
+
+        characterUpdateFetch(id)
+        
     })
 
     //function to update the DOM (total calories) after its persisted to DB
@@ -104,7 +110,37 @@ document.addEventListener('DOMContentLoaded', (event) => {
         caloriesSpan.textContent = character.calories
     }
 
+    //ADVANCED DELIVERABLES
+
+    //event listener for delete all calories btn
+    resetBtn.addEventListener('click', (e) => {
+        const totalCharacterCalories = 0
+        const id = name.dataset.id
+
+        //function to set DOM for calories to 0
+        const zeroCalories = () => {
+            calories.textContent = "0"
+        }
+        
+        //ran out of time but this should be more DRY with above character "show" fetch
+        fetch(`${url}/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+
+            },
+            body: JSON.stringify({
+                calories: totalCharacterCalories
+            })
+        })
+            .then(zeroCalories())
+    })
+
 }); //DOMLOADED event listener
+
+
+
 
 
 
