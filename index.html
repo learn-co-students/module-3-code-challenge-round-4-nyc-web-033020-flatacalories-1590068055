@@ -27,8 +27,25 @@
                     <input type="submit" value="Add Calories"/>
                 </form>
                 <button id="reset-btn">Reset Calories</button>
+                <button id="edit-btn">Edit Character</button>
+			<div id='update'>
+				<form id="update-form">
+					<input type='hidden' value='' id='updateFormId' />
+					<input type='text' value='' name='name' />
+					<input type='submit' value='Confirm'>
+				</form>
+			</div>
             </div>
         </div>
+		
+
+		<div id='new'>
+			<form id='new-character'>
+				<input type='text' value='' name='name' />
+				<input type='submit' value='Add Character'>
+			</form>
+		</div>
+
         <script src="src/index.js"></script>
     </body>
 </html>

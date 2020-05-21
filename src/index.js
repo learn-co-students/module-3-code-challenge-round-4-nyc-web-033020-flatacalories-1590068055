@@ -19,7 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const dropdown = document.getElementById('character-names');	
 	const calorieForm = document.getElementById('calories-form');
-	
+	const editDiv = document.getElementById('update');
+	const newDiv = document.getElementById('new');
+	const editForm = document.getElementById('update-form');
+
+	editDiv.style.display = 'none';
+	newDiv.style.display = 'none'
+
 	// GET all characters, pass to populateDropdown
 	const getCharacters = () => {
 		fetch("http://localhost:3000/characters")
@@ -65,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			viewImgUrl.src = character.image;
 			viewCalories.textContent = character.calories;
 			caloriesFormId.value = id;
+			editForm.name.value = character.name;
 		});
 	};
 
@@ -106,6 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById('calories-form').reset()
 		});
 	};
+
+	// Update name 
+	const editButton = document.getElementById('edit-btn');
+	editButton.addEventListener('click', () => {
+			editDiv.style.display = 'block'
+			editButton.textContent = "Darn. Out of time."
+	});
 
 	getCharacters();
 })
