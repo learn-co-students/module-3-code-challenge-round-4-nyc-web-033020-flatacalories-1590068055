@@ -83,3 +83,13 @@ const updateCharacter = (id, newData) => {
     document.getElementById("calories").textContent = character.calories
   })
 };
+
+document.addEventListener("click", (e) => {
+  const resetButton = document.getElementById('reset-btn')
+  const characterId = resetButton.previousElementSibling.children[0].value
+  if(e.target === resetButton){
+    updateCharacter(characterId, {
+      calories: caloriesSum
+    })
+  };
+});
