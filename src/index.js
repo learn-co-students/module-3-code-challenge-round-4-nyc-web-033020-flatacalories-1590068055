@@ -19,7 +19,7 @@ function runWebApp() {
 
   function postCalories(id, calories) {
     fetch(baseUrl + id, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
