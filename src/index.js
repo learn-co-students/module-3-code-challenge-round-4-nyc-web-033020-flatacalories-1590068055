@@ -12,22 +12,25 @@ document.addEventListener('DOMContentLoaded',() => {
 
     const getChar = () => {
         fetch(charURL)
-        .then(resp => resp.json)
+        .then(resp => resp.json())
+        // .then(console.log)
         .then(getCharacters)
     }
-    // daySelect = document.getElementById('daySelect');
-    // daySelect.options[daySelect.options.length] = new Option('Text 1', 'Value1');
 
     const getCharacters = characters => {
+        console.log(characters)
         characters.forEach(character => {
             const charEntry = document.createElement('option')
-            charEntry.options[charEntry.options.length] = new Option('Text 1', 'Value1')
             charEntry.dataset.id = character.id
+            charEntry.innerHTML = `<option data-id=${character.id} class='showSelect'> ${character.name}</option>`
             charDropdown.append(charEntry)
         })
-
     }
-
+    charDropdown.addEventListener('click', event=> {
+        if (event.target.className === 'showSelect'){
+            
+        }
+    })
 
 
 
