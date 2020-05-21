@@ -18,6 +18,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
     })
 })
 
+document.addEventListener('click', (event) => {
+  if (event.target.getAttribute('id') === 'reset-btn') {
+    const caloriesSpan = event.target.parentElement.querySelector('#calories')
+    const characterId = event.target.parentElement.querySelector('#characterId').value
+
+    fetch(`${url}/${characterId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        calories: 0,
+      })
+    }).then(res => res.json())
+    .then(character => caloriesSpan.textContent = character.calories)
+  }
+})
+
 document.addEventListener('submit', (event) => {
   if (event.target.getAttribute('id') === 'calories-form') {
     event.preventDefault()
