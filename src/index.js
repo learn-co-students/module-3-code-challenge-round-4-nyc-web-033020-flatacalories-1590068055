@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         inputCalories = parseInt(inputCalories.value)
         
         const totalCalories = (currentCalories + inputCalories)
-        console.log(totalCalories)
+        // console.log(totalCalories)
 
         //patch request to correct character, update calories
         fetch(`${url}/${id}`, {
@@ -109,6 +109,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 calories: totalCalories
             })
         })
+            .then(resp => resp.json())
+            .then(json => updateCalories(json))
+            .then(form.reset())
     })
+
+    const updateCalories = (character) => {
+        // console.log(character)
+        const caloriesSpan = document.querySelector('#calories')
+        console.log(character.calories)
+        caloriesSpan.textContent = character.calories
+    }
 
 });
