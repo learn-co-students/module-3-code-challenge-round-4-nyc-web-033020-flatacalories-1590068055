@@ -12,8 +12,7 @@ function viewCharacter(obj){
 
     nameTag.innerHTML = `${obj.name}`
     imageTag.src = `${obj.image}`
-    caloriesTag.innerHTML = `${obj.caloriesTag}`
-    console.log(nameTag, imageTag, caloriesTag)
+    caloriesTag.innerHTML = `${obj.calories}`
 }
 
 
@@ -22,14 +21,33 @@ viewCharacter('something')
 
 fetch(url).then(res => res.json()).then(char => characterSelector(char))
 
+document.addEventListener('click',)
+
+
+
+
+
+
 
  function characterSelector(array){
     array.forEach(character => {
-      const optionTag = document.createAttribute('option')
-      optionTag.innerHTML = `${character.name}`
-      selecter.insertRow(optionTag)
+      const optionTag = document.createElement('option')
+      optionTag.innerHTML = `<p '[data-set='${character.id}']'> ${character.name} </p>`
+      selecter.add(optionTag)
     })
  }
+
+
+ selecter.addEventListener('change', function(e){
+      const characterName = e.target.value
+      fetch(url).then(res => res.json()).then(characters => {
+          characters.forEach(char => {
+              if (char.name == characterName){
+                viewCharacter(char)
+              }
+          })
+      })
+ })
 
 
 
