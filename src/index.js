@@ -15,29 +15,30 @@ fetchCharacters()
 //1b.) populate dropdown with server data 
 const populateDropdown = characters => {
     characters.forEach(character => {
-        console.log(character)
         const characterOption = document.createElement('option')
         characterDropdown.appendChild(characterOption)
         characterOption.innerHTML = `${character.name}`
-        characterOption.
+        characterOption.id = `${character.id}`
+        console.log(character.id)
     })
 }
 characterDropdown.addEventListener('change', event => {
-    console.log(event.target.value)
-
-    
+    if (event) {
+    const usersChoice = event.target.selectedOptions[0].id
+    charactersInfo.innerHTML = `
+    <p id="name">${name}</p>
+    <img id="image" src=${image}><!-- display character image here -->
+    <h4>Total Calories: <span id="calories">Character's Calories</span> </h4>
+    <form id="calories-form">
+    <input type="hidden" value="$.id}" id="characterId"/> <!-- Assign character id as a value here -->
+    <input type="text" placeholder="Enter Calories"/>
+    < input type="submit" value="Add Calories"/>
+    </form>
+`
+}
 //see character's info
 //add statement to capture diff selections
-charactersInfo.innerHTML = `
-<p id="name">${character.name}</p>
-<img id="image" src=${character.image}><!-- display character image here -->
-<h4>Total Calories: <span id="calories">Character's Calories</span> </h4>
-<form id="calories-form">
-<input type="hidden" value="${character.id}" id="characterId"/> <!-- Assign character id as a value here -->
-<input type="text" placeholder="Enter Calories"/>
-<input type="submit" value="Add Calories"/>
-</form>
-`
+
 
 
 })
