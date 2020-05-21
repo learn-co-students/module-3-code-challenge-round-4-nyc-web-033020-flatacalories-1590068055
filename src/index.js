@@ -40,10 +40,28 @@ document.addEventListener("DOMContentLoaded", ()=> {
         resetCalories(resetCharCalId)
     })
 
+    document.addEventListener('click', (e)=>{
+        if (e.target.id === 'edit-name'){
+            const editCharID = document.querySelector('#detailed-info').dataset.id
+        }
+    })
+
+
+
 })
 
 const loadCharacterEditBtn = () =>{
-    document.querySelector('#name').insertAdjacentElement('afterend','<button id="edit-name">Edit</button>')
+    document.querySelector('#name').insertAdjacentHTML(
+        'beforebegin',
+        '<button id="edit-name">Edit Name</button>'
+        )
+}
+
+const loadCharEditField = () => {
+    document.querySelector('#edit-name').insertAdjacentHTML(
+        'afterend',
+        '<form id="edit-form"><input type="text"></form>'
+    )
 }
 
 // This function resets the selected character's calorie count
