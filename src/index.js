@@ -1,6 +1,7 @@
 
 
 // fetch characters
+// render characters
 
 // addEventlistener click to see fetched character name in
 // drop down menu
@@ -13,8 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const dropdown = document.querySelector('#dropdown')
 
+  const charDetails = document.querySelector
+
   fetch("http://localhost:3000/characters")
   .then(res => res.json())
+  .then(data => console.log(data[1]))
 
   // const renderCharacters = characters => {
   //   characters.forEach( char => {
@@ -23,14 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //   })
   // }
 
-document.addEventListener('click'), event => {
-  if(event.target.button.value === "Add Calories" {
+// document.addEventListener('click'), event => {
+//   if(event.target.button.value === "Add Calories" {
 
-  }
+//   }
 
-}
-
-
+// }
 
 
   // dropdown.append('<option selected disabled>Select a Character</option>')
