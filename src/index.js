@@ -27,8 +27,8 @@ Clicks on "Add Calories" button to add calories to a Character. Persist calories
 
 PSEUDO CODE
 
-Grab the add calories button and set to a const
-Add event listener to submit button and preventDefault
+√ Grab the add calories button and set to a const
+√ Add event listener to submit button and preventDefault
 Make a fetch('patch') request containing url headers and body info with calorie change
     The body will contain the input value of the textField
     Optimistically render the character's new calorie count
@@ -46,17 +46,39 @@ Add a new character
 
 
 const url = "http://localhost:3000/characters"
+const urlHeaders = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
 const dropdown = document.querySelector('#character-names')
 const detailedDiv = document.querySelector('#detailed-info')
 const caloriesForm = document.querySelector('#calories-form')
-
+caloriesForm.children[2].id = "submit"
+const addCalorieBtn = document.querySelector('#submit')
 
 populateDropdown()
-addIdToSubmitBtn()
 
-function addIdToSubmitBtn(){
-    caloriesForm.children[2].id = "submit"
-}
+caloriesForm.addEventListener('submit', event => {
+    
+    const charId = event.target.children[0].id
+    const currentCalories = document.querySelector('#calories').textContent
+    const calorieNumField = event.target.children[1].value
+    const calorieTotal = (parseInt(calorieNumField, 10) + parseInt(currentCalories, 10))
+    console.log(calorieTotal)
+
+    
+    fetch(`${url}/${charId}`, {
+        method: 'PATCH',
+        headers: urlHeaders,
+        body: JSON.stringify({
+            calories: calorieTotal
+        })
+    })
+    .then(resp => resp.json())
+    .then(cons)
+
+    event.preventDefault()
+})
 
 dropdown.addEventListener('change', event => {
     let divName = document.querySelector('#name')
@@ -74,6 +96,7 @@ dropdown.addEventListener('change', event => {
                     divName.textContent = char.name
                     divImage.src = char.image
                     divCalories.textContent = char.calories 
+                    caloriesForm.children[0].id = char.id
                 }
             })
         })
