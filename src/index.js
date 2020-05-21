@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(renderCharacters)
     } 
 
-    const renderCharacters = (characters) => {
+    const renderCharacters = characters => {
         characters.forEach(char => {
             const select = document.querySelector('#character-names')
             const newOption = document.createElement('option')
@@ -18,21 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
             newOption.text = `${char.name}`
             select.add(newOption)
 
+            //add event listener for selecting character from dropdown
+            //make GET request with ID of char and display in detailed info div
+            
             document.addEventListener('change', (e) => {
-                if(e.target.options === dataset.id) {
-                    dataset.id
+                // console.log(e.target)
+                if(e.target.dataset.id === char.id) {
                     fetch(`${charUrl}/${char.id}`)
                         .then(resp => resp.json())
-                        // .then(console.log(char))
-                        //     {
-                        //     const infoDiv = document.querySelector('#detailed-info')
-                        //     const name = document.querySelector('#name')
-                        //     name.textContent = `${char.name}`
-                        //     const image = document.querySelector('#image')
-                        //     image.textContent = `${char.image}`
-                        //     const calories = document.querySelector('#calories')
-                        //     calories.textContent = `${char.calories}`
-                        // })
+                        .then(char => {
+                            const infoDiv = document.querySelector('#detailed-info')
+                            const name = document.querySelector('#name')
+                            name.textContent = `${char.name}`
+                            const image = document.querySelector('#image')
+                            image.textContent = `${char.image}`
+                            const calories = document.querySelector('#calories')
+                            calories.textContent = `${char.calories}`
+                        })    
                 }
             })
         })
@@ -49,12 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
     // } 
-
-    //add event listener for selecting character from dropdown
-    //make GET request with ID of char and display in detailed info div
     
-
-
 
             // const topOption = document.querySelector('#top')
             // const newOption = document.createElement('option')
