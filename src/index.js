@@ -39,22 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
             
     form.addEventListener('submit', (event) => {
         event.preventDefault()
-        fetch(`http://localhost:3000/characters/${event.target[0].value}`, {
+        if(isNaN(event.target[1].value) || event.target[1].value === ""){
+            form.reset()
+            return alert("Please enter a correct value")
+        } else {
+            fetch(`http://localhost:3000/characters/${event.target[0].value}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    calories: parseInt(calories.innerHTML) + parseInt(event.target[1].value)
+                })
+            }).then(resp => resp.json())
+            .then(character => {
+                calories.innerHTML = character.calories
+            })
+            form.reset()
+        }
+    })
+
+    resetBtn.addEventListener('click', () => {
+        fetch(`http://localhost:3000/characters/${form[0].value}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                calories: parseInt(calories.innerHTML) + parseInt(event.target[1].value)
-            }),
-        }).then(resp => resp.json())
-        .then(character => {
-            calories.innerHTML = character.calories
-        })
-        form.reset()
-    })
-
-    resetBtn.addEventListener('click', (e) => {
-        
+                calories: 0
+            })
+        }).then(() => { calories.innerHTML = 0})
     })
 })
