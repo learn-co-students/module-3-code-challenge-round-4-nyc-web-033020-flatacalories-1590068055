@@ -1,11 +1,14 @@
-//make GET request to characters 
+//√make GET request to characters 
+//√add character names into dropdown
 //add eventlistener to dropdown menu 
 
 
 document.addEventListener('DOMContentLoaded', () => {
     const baseUrl = 'http://localhost:3000/characters'
     const dropDown = document.getElementById('character-names')
-    const option = dropDown.getElementsByTagName('option')
+    const detailedInfo = document.getElementById('detailed-info')
+    const name = document.getElementById('name')
+    const image = document.getElementById('img')
 
     const getChar = () => {
         fetch(baseUrl)
@@ -14,20 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const allChars = chars => {
-
-        const charLi = document.createElement('li')
-        dropDown.addEventListener('click', event => {
-            chars.forEach(char => {
-                charLi.innerHTML = char.name
-            })
+        chars.forEach(char => {
+            const charOption = document.createElement('option')
+            charOption.innerHTML = `${char.name}`
+            dropDown.append(charOption)
         })
-        option.append(charLi)
+
+        chars.forEach(info => {
+            name.innerHTML = `${info.name}`
+            image.innerHTML = `${info.image}`
+        })
+        detailedInfo.append(name, image)
+
     }
 
- 
+    // const characterInfo = charInfo => {
+    //     charInfo.forEach(info => {
+    //         name.innerHTML = `${char.name}`
+    //     })
+    // }
 
 
 
 
-    // getChar()
+    getChar()
 })
