@@ -16,7 +16,7 @@ const animalName = document.getElementById('name')
 const animalImage = document.getElementById('image')
 const form = document.getElementsByTagName('form')[0]
 const input1 = form.getElementsByTagName('input')[0]
-const input2 = form.getElementsByTagName('input')[0]
+const input2 = form.getElementsByTagName('input')[1]
 const input3 = form.getElementsByTagName('input')[2]
 
 
@@ -65,16 +65,16 @@ form.addEventListener('submit', function(event){
     
    const id = input1.value
 
-console.log(   input2.value )
+console.log(   input1.value )
 
-   fetch(`http://localhost:3000/characters/${id}`, {
-       method:"PATCH", 
-       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify()
-   })
+//    fetch(`http://localhost:3000/characters/${id}`, {
+//        method:"PATCH", 
+//        headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//       body: JSON.stringify()
+//    })
  
  
 })
